@@ -1,0 +1,15 @@
+[13-Aug-2022 05:46:47 UTC] PHP Warning:  require(/home/luo3924aibo6/pos-development/vendor/autoload.php): Failed to open stream: No such file or directory in /home/luo3924aibo6/pos-development/artisan on line 18
+[13-Aug-2022 05:46:47 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/luo3924aibo6/pos-development/vendor/autoload.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/luo3924aibo6/pos-development/artisan:18
+Stack trace:
+#0 {main}
+  thrown in /home/luo3924aibo6/pos-development/artisan on line 18
+[13-Aug-2022 05:47:58 UTC] PHP Warning:  require(/home/luo3924aibo6/pos-development/vendor/autoload.php): Failed to open stream: No such file or directory in /home/luo3924aibo6/pos-development/artisan on line 18
+[13-Aug-2022 05:47:58 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/luo3924aibo6/pos-development/vendor/autoload.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/luo3924aibo6/pos-development/artisan:18
+Stack trace:
+#0 {main}
+  thrown in /home/luo3924aibo6/pos-development/artisan on line 18
+[13-Aug-2022 05:48:37 UTC] PHP Warning:  require(/home/luo3924aibo6/pos-development/vendor/autoload.php): Failed to open stream: No such file or directory in /home/luo3924aibo6/pos-development/artisan on line 18
+[13-Aug-2022 05:48:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/luo3924aibo6/pos-development/vendor/autoload.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/luo3924aibo6/pos-development/artisan:18
+Stack trace:
+#0 {main}
+  thrown in /home/luo3924aibo6/pos-development/artisan on line 18

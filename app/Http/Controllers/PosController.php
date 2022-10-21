@@ -28,7 +28,7 @@ class PosController extends Controller
      * Get Category featured List
      *
      * @return Json
-     * 
+     *
      */
     public function getcategoryfeturedlist()
     {
@@ -49,7 +49,7 @@ class PosController extends Controller
      * Get Product List
      *
      * @return Json
-     * 
+     *
      */
     public function getproductslist(Request $request)
     {
@@ -82,7 +82,7 @@ class PosController extends Controller
      * Get Product Data For Pos Page
      *
      * @return Json
-     * 
+     *
      */
     public function getProductPosData(Request $request)
     {
@@ -104,11 +104,11 @@ class PosController extends Controller
      * Add Product in Cart
      *
      * @return Json
-     * 
+     *
      */
     public function addtocart(Request $request)
     {
-        $stores = session()->get('cartItem');
+        $stores = session()->get('demoCartData');
 
         $productId = $request->productId;
         $Quantity = $request->Quantity;
@@ -120,13 +120,13 @@ class PosController extends Controller
             foreach($stores as $key=>$store){
                 if($productId == $store['product'] && $sizeId == $store['size'] && $ingArray == $store['ingredient']){
                     $stores[$key]['quantity'] = $store['quantity'] + 1;
-                    session()->put('cartItem', $stores);
+                    session()->put('demoCartData', $stores);
                     return 1;
                 }
             }
         }
-        $cartItem = ['product' => $productId, 'quantity' => $Quantity, 'size' => $sizeId, 'ingredient' => $ingArray, 'combo' => $combo,'ingre'=>$ingre];
-        session()->push('cartItem', $cartItem);
+        $demoCartData = ['product' => $productId, 'quantity' => $Quantity, 'size' => $sizeId, 'ingredient' => $ingArray, 'combo' => $combo,'ingre'=>$ingre];
+        session()->push('demoCartData', $demoCartData);
         return 1;
 
     }
@@ -135,11 +135,12 @@ class PosController extends Controller
      * Get Cart Detail
      *
      * @return Json
-     * 
+     *
      */
     public function getCart(Request $request)
     {
-        $stores = session()->get('cartItem');
+        // $stores = session()->put('demoCartData', []);
+        $stores = session()->get('demoCartData');
         $cartData = [];
         $total = 0;
         if($stores){
@@ -181,13 +182,13 @@ class PosController extends Controller
      * Remove Cart Detail
      *
      * @return Json
-     * 
+     *
      */
     public function removeCart(Request $request)
     {
-        $stores = session()->get('cartItem');
+        $stores = session()->get('demoCartData');
         unset($stores[$request->index]);
-        session()->put('cartItem', $stores);
+        session()->put('demoCartData', $stores);
         return 'success';
     }
 
@@ -195,12 +196,12 @@ class PosController extends Controller
      * Cart Product Quantity Update
      *
      * @return Json
-     * 
+     *
      */
     public function changeCartQuantity(Request $request)
     {
         // dd($request->all());
-        $stores = session()->get('cartItem');
+        $stores = session()->get('demoCartData');
         if($request->action == 'plus'){
             $newValue = $stores[$request->index]['quantity'] + 1;
             $stores[$request->index]['quantity'] = $newValue;
@@ -214,7 +215,7 @@ class PosController extends Controller
                 unset($stores[$request->index]);
             }
         }
-        session()->put('cartItem', $stores);
+        session()->put('demoCartData', $stores);
         return 'success';
 
     }
@@ -223,15 +224,20 @@ class PosController extends Controller
      * Cart To Order Save
      *
      * @return Json
-     * 
+     *
      */
     public function saveOrder(Request $request)
     {
-        $cartProduct = session()->get('cartItem');
+        // session()->forget('demoOrderData');
+        // session()->forget('demoCartData');
+        // dd('1');
+        // dd(session()->get('demoCartData'));
+        $cartProduct = session()->get('demoCartData');
         $cartData = [];
         $total = 0;
         $purchaseType = $request->purchase;
         $description = $request->description;
+
 
         foreach($cartProduct as $key=>$data){
             if($data['combo'] == "true"){
@@ -262,66 +268,110 @@ class PosController extends Controller
             $total += $price;
         }
 
-        $order = new Order();
-        $order->pay_amount = $total;
-        $order->total_amount = $total;
-        $order->purchase_type = $purchaseType;
-        $order->description = $description;
-        $order->user_id = Auth::user()->id;
-        $order->save();
 
+        // $stores = session()->get('demoCartData');
+        // session()->put('demoCartData', $stores);
+
+
+        $stores = session()->get('demoOrderData');
+
+        $table = Table::where('number',$request->orderTable)->first();
+        $fullOrder['table'][$table->id] = [];
+        $demoOrderData = ['pay_amount' => $total, 'total_amount' => $total, 'purchase_type' => $purchaseType, 'description' => $description];
+        // dd($cartProduct);
+        $orderproduct = [];
         foreach($cartProduct as $key=>$data){
             $ingredients = explode(',', $data['ingredient']);
-            $orderproduct = new OrderProduct();
-            $orderproduct->order_id = $order->id;
-            if($data['combo'] == "true"){
-                $orderproduct->combo_id = $data['product'];
-            }else if($data['ingre'] == "true"){
-                $orderproduct->ingredient_id = $data['product'];
-            }else{
-                $orderproduct->product_id = $data['product'];
-            }
-            $orderproduct->amount = $cartData[$key]['price'];
-            $orderproduct->quantity = $data['quantity'];
-            $orderproduct->save();
-
-            foreach($ingredients as $ingredient){
+            $orderproducting = [];
+             foreach($ingredients as $ik => $ingredient){
                 if($ingredient){
-                    $ing = new OrderProductIngredient();
-                    $ing->order_product_id = $orderproduct->id;
-                    $ing->ingredient_id = $ingredient;
-                    $ing->save();
+                   $orderproducting[$ik] = $ingredient;
                 }
+                }
+
+
+                if($data['combo'] == "true"){
+                    $orderproduct[$key]['combo_id'] = $data['product'];
+                }else if($data['ingre'] == "true"){
+                    $orderproduct[$key]['ingredient_id'] = $data['product'];
+                }else{
+                    $orderproduct[$key]['product_id'] = $data['product'];
+                }
+                $orderproduct[$key]['amount'] = $cartData[$key]['price'];
+                $orderproduct[$key]['quantity'] = $data['quantity'];
+                $orderproduct[$key]['orderproductingredient'] = $orderproducting;
+
             }
-        }
-
-        $table = Table::where('number',$request->orderTable)->orderByRaw('RAND()')->first();
-
-        $table->current = 'Running';
-        $table->save();
-
-        $customer = Customer::updateOrCreate([
-            'phone'   => $request->contactNumber,
-        ],[
-            'email'     => $request->get('customerEmail'),
-            'name'     => $request->get('customerName'),
-        ]);
-        
-        $tableorder = new TableOrder();
-        $tableorder->order_id = $order->id;
-        $tableorder->table_id = $table->id;
-        $tableorder->customer_id = $customer->id;
-        $tableorder->save();
-
-        session()->forget('cartItem');
+        $demoOrderData['order_product'] = $orderproduct;
+        $rand = rand(10,1000);
+        $fullOrder['table'][$table->id]['order'][$rand] = $demoOrderData;
+        session()->push('demoOrderData', $fullOrder);
+        session()->forget('demoCartData');
+        // dd(session()->get('demoOrderData'));
         return 'success';
+
+
+
+        // $order = new Order();
+        // $order->pay_amount = $total;
+        // $order->total_amount = $total;
+        // $order->purchase_type = $purchaseType;
+        // $order->description = $description;
+        // $order->user_id = Auth::user()->id;
+        // $order->save();
+
+        // foreach($cartProduct as $key=>$data){
+        //     $ingredients = explode(',', $data['ingredient']);
+        //     $orderproduct = new OrderProduct();
+        //     $orderproduct->order_id = $order->id;
+        //     if($data['combo'] == "true"){
+        //         $orderproduct->combo_id = $data['product'];
+        //     }else if($data['ingre'] == "true"){
+        //         $orderproduct->ingredient_id = $data['product'];
+        //     }else{
+        //         $orderproduct->product_id = $data['product'];
+        //     }
+        //     $orderproduct->amount = $cartData[$key]['price'];
+        //     $orderproduct->quantity = $data['quantity'];
+        //     $orderproduct->save();
+
+        //     foreach($ingredients as $ingredient){
+        //         if($ingredient){
+        //             $ing = new OrderProductIngredient();
+        //             $ing->order_product_id = $orderproduct->id;
+        //             $ing->ingredient_id = $ingredient;
+        //             $ing->save();
+        //         }
+        //     }
+        // }
+
+        // $table = Table::where('number',$request->orderTable)->orderByRaw('RAND()')->first();
+
+        // $table->current = 'Running';
+        // $table->save();
+
+        // $customer = Customer::updateOrCreate([
+        //     'phone'   => $request->contactNumber,
+        // ],[
+        //     'email'     => $request->get('customerEmail'),
+        //     'name'     => $request->get('customerName'),
+        // ]);
+
+        // $tableorder = new TableOrder();
+        // $tableorder->order_id = $order->id;
+        // $tableorder->table_id = $table->id;
+        // $tableorder->customer_id = $customer->id;
+        // $tableorder->save();
+
+        // session()->forget('demoCartData');
+        // return 'success';
     }
 
     /**
      * Next Avilable Table Check For Reservation
      *
      * @return Json
-     * 
+     *
      */
     public function getavaliableTable()
     {
@@ -334,9 +384,9 @@ class PosController extends Controller
      *
      * @param Request $request
      * @param TableNumber $request->table
-     * 
+     *
      * @return Json
-     * 
+     *
      */
     public function checkCustomerOnGoingOrder(Request $request)
     {
@@ -355,9 +405,9 @@ class PosController extends Controller
      *
      * @param Request $request
      * @param ContactNumber $request->phone
-     * 
+     *
      * @return Json
-     * 
+     *
      */
     public function findCustomerThroughNumber(Request $request)
     {

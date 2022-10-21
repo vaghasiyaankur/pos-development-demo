@@ -18,10 +18,12 @@ class OrderController extends Controller
      * Get Order List
      *
      * @return Json
-     * 
+     *
      */
     public function  getOrder(Request $request)
     {
+        $data = session()->get('demoOrderData');
+        dd($data);
         $user_id = Auth::user()->id;
         $orderData = Order::where('payed',0)->get()->whereNotNull('tableOrder.table_id')->groupBy('tableOrder.table_id');
         $orders = [];
@@ -69,7 +71,7 @@ class OrderController extends Controller
      * Time Different For Order
      *
      * @return Json
-     * 
+     *
      */
     public function  getOrdersTime(Request $request)
     {
@@ -92,7 +94,7 @@ class OrderController extends Controller
      * Get Single Order For Popup
      *
      * @return Json
-     * 
+     *
      */
     public function  getOrderForPopup(Request $request)
     {
@@ -141,7 +143,7 @@ class OrderController extends Controller
      * Send Order Data For Print
      *
      * @return Json
-     * 
+     *
      */
     public function printOrder(Request $request)
     {
@@ -217,7 +219,7 @@ class OrderController extends Controller
      * Order Save In Database
      *
      * @return Json
-     * 
+     *
      */
     public function orderSave(Request $request)
     {
@@ -228,12 +230,12 @@ class OrderController extends Controller
 
         return response()->json(['success' => "Order serve successfully."]);
     }
-    
+
      /**
      * Pay Order=
      *
      * @return Json
-     * 
+     *
      */
     public function orderPay(Request $request)
     {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header v-if="!isLogin && !isLock" :allpermissions="allpermissions" :image_url="image_url"></Header>
+        <Header  :image_url="image_url"></Header>
 
         <router-view :allpermissions="allpermissions" :currencyCode="currencyCode" @addLoader="addLoader" @removeLoader="removeLoader"  @showToast="showToast"></router-view>
             <div class="overlay">
@@ -73,7 +73,7 @@ export default {
             res.data.forEach(element => {
                 this.showToast('order Added in table no : '+element,"success");
             });
-            this.callInterval();
+            // this.callInterval();
         }).catch(err => {
 
         });

@@ -17,9 +17,10 @@ class TableSeeder extends Seeder
     public function run()
     {
 
-        $current = ['Available','Deactive'];
+        // $current = ['Available','Deactive'];
         // $current = ['Available','Running','Deactive'];
 
+        $current = ['Available'];
         $tables = [
             "1","2","3","4","5","6","7","8","9","10"
         ];

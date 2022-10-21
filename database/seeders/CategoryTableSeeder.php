@@ -14,27 +14,27 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        // $categories = [
-        //     'Pizza',
-        //     'Aglioe',
-        //     'Gamberoni',
-        //     'Primavera (vegetarisch)',
-        //     'Aperitifs',
-        //     'Shots',
-        //     'Cocktails',
-        //     'Kaffee',
-        //     'Reis',
-        //     'Wochenmenüs',
-        //     'Warme Getränke Mit Schnaps',
-        //     'Wunschpizza'
-        // ];
-        // foreach($categories as $key=>$category){
-        //     Category::create([
-        //         'name' => $category,
-        //         'image' => 'category/category'.($key + 1).'.png',
-        //         'featured' => 0,
-        //     ]);
-        // }
-            
+        $categories = [
+            'Pizza',
+            'Aglioe',
+            'Gamberoni',
+            'Primavera (vegetarisch)',
+            'Aperitifs',
+            'Shots',
+            'Cocktails',
+            'Kaffee',
+            'Reis',
+            'Wochenmenüs',
+            'Warme Getränke Mit Schnaps',
+            'Wunschpizza'
+        ];
+        foreach($categories as $key=>$category){
+            Category::create([
+                'name' => $category,
+                'image' => 'category/category'.($key + 1).'.png',
+                'featured' => 0,
+            ]);
+        }
+
     }
 }

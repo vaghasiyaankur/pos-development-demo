@@ -107,20 +107,20 @@
           <div class="container-fluid m-0 ps-2">
             <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav">
-              <li class="nav-item" v-if="permissions.Index">
+              <li class="nav-item">
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Index' ? 'text-success' : ''" href="javascript:;" to="/"> <span data-key="t-dashboards">Dashboards</span></router-link>
               </li>
               <!-- end Dashboard Menu -->
-              <li class="nav-item" v-if="permissions.Pos">
+              <li class="nav-item">
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Pos' ? 'text-success' : ''" href="javascript:;" to="/pos"> <span data-key="t-apps">POS</span></router-link>
               </li>
-              <li class="nav-item" v-if="permissions.Orders">
+              <li class="nav-item">
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Orders' ? 'text-success' : ''" href="javascript:;" to="/orders">
 
                   <span data-key="t-landing">Orders</span>
                 </router-link>
               </li>
-              <li class="nav-item menumanagement--header" :class="{'d-none' : type == 'Kitchen Manager' || type == 'Waiter'}" v-if="permissions.Category || permissions.Ingredient || permissions.Combo || permissions.ProductAdd">
+              <li class="nav-item menumanagement--header" :class="{'d-none' : type == 'Kitchen Manager' || type == 'Waiter'}" >
                 <a
                   class="nav-link menu-link collapse--class menu--management--toggle" href="javascript:;"
                   :class="this.$route.name == 'Category'|| this.$route.name == 'subCategory' || this.$route.name == 'Product' || this.$route.name == 'Products' || this.$route.name == 'ProductAdd' || this.$route.name == 'ProductEdit' || this.$route.name == 'EditProduct'  || this.$route.name == 'IngredientCategory'  || this.$route.name == 'Combo' || this.$route.name == 'AddCombo' || this.$route.name == 'EditCombo'  || this.$route.name == 'Ingredient' ? 'text-success' : ''"
@@ -133,16 +133,16 @@
                 </a>
                 <div class="menu-dropdown block--show" id="menumanagement--div">
                   <ul class="nav nav-sm flex-column">
-                    <li class="nav-item" v-if="permissions.Category">
+                    <li class="nav-item" >
                       <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Category' || this.$route.name == 'subCategory' ? 'text-success' : ''" to="/category"> <span data-key="t-category-management">Category</span></router-link>
                     </li>
-                    <li class="nav-item" v-if="permissions.IngredientCategory">
+                    <li class="nav-item" >
                       <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'IngredientCategory' || this.$route.name == 'Ingredient' ? 'text-success' : ''" to="/ingredient-category"> <span data-key="t-dashboards">Ingredient</span></router-link>
                     </li>
-                    <li class="nav-item" v-if="permissions.Combo">
+                    <li class="nav-item" >
                       <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Combo' || this.$route.name == 'AddCombo' || this.$route.name == 'EditCombo' ? 'text-success' : ''" to="/combo"> <span data-key="t-dashboards">Combo</span></router-link>
                     </li>
-                    <li class="nav-item" v-if="permissions.Product">
+                    <li class="nav-item" >
                       <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Product' || this.$route.name == 'Products' || this.$route.name == 'ProductAdd' || this.$route.name == 'ProductEdit' || this.$route.name == 'EditProduct' ? 'text-success' : ''"  to="/products"> <span data-key="t-dashboards">Product</span></router-link>
                     </li>
                   </ul>
@@ -154,36 +154,36 @@
                   <span data-key="t-pages">Orders</span>
                 </a>
               </li> -->
-              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type ==  'Sub Admin' }" v-if="permissions.Category">
+              <!-- <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type ==  'Sub Admin' }" >
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Category' || this.$route.name == 'subCategory' ? 'text-success' : ''" to="/category"> <span data-key="t-category-management">Category</span></router-link>
               </li>
-              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" v-if="permissions.IngredientCategory">
+              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" >
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'IngredientCategory' || this.$route.name == 'Ingredient' ? 'text-success' : ''" to="/ingredient-category"> <span data-key="t-dashboards">Ingredient</span></router-link>
               </li>
-              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" v-if="permissions.ComboAdd">
+              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" >
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Combo' || this.$route.name == 'AddCombo' || this.$route.name == 'EditCombo' ? 'text-success' : ''" to="/combo"> <span data-key="t-dashboards">Combo</span></router-link>
               </li>
-              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" v-if="permissions.Product">
+              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" >
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Product' || this.$route.name == 'Products' || this.$route.name == 'ProductAdd' || this.$route.name == 'ProductEdit' || this.$route.name == 'EditProduct' ? 'text-success' : ''"  to="/products"> <span data-key="t-dashboards">Product</span></router-link>
-              </li>
+              </li> -->
 
 
-              <li class="nav-item" v-if="permissions.Table">
+              <li class="nav-item" >
               <router-link class="nav-link menu-link small--size--navlink" href="javascript:;" :class="this.$route.name == 'Table' ? 'text-success' : ''"  to="/table"> <span data-key="t-pages">Floorplan</span></router-link>
               </li>
 
               <!-- <li class="nav-item" v-if="permissions.UserManagement">
               <router-link class="nav-link menu-link small--size--navlink" href="javascript:;" to="/user-management">  <span data-key="t-apps">User Management</span></router-link>
               </li> -->
-              <li class="nav-item" v-if="permissions.Report">
+              <!-- <li class="nav-item" >
                 <a class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Reports' ? 'text-success' : ''"  href="javascript:;">
                   <span data-key="t-landing">Reports</span>
                 </a>
-              </li>
-              <li class="nav-item" v-if="permissions.Completeorder">
+              </li> -->
+              <li class="nav-item" >
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'CompleteOrder' ? 'text-success' : ''" to="/complete-order"> <span data-key="t-dashboards">Complete order</span></router-link>
               </li>
-              <li class="nav-item" v-if="permissions.Setting">
+              <li class="nav-item" >
                 <router-link class="nav-link menu-link small--size--navlink" href="javascript:;" :class="this.$route.name == 'Setting' || this.$route.name == 'GeneralSetting'|| this.$route.name == 'CurrencySetting' || this.$route.name == 'TaxSetting' || this.$route.name == 'UserManagement' ? 'text-success' : ''" to="/setting">
 
                   <span data-key="t-landing">Setting</span>

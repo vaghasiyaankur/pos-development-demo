@@ -1,5 +1,5 @@
 <template>
-    
+
   <div class="main-content">
     <div class="page-content pb-0 ps-0 pt-4" style="margin-top: 49px">
         <!---------TAB VIEW START -------->
@@ -33,7 +33,7 @@
                               d-flex
                               align-items-center
                               p-1
-                              bg-white border-radius-10
+                              bg-white border-radius-10     
                               equal-height-pos
                               product--list
                             " :data-id="featurecategory.id" v-bind:class="(featurecategory.name === 'All')?'active':''">
@@ -286,7 +286,7 @@ export default {
         outSideClick(){
             console.log('yes');
         }
-    },   
+    },
     updated() {
         var highestBox = 0;
         var targetDiv = document.querySelectorAll('.equal-height-pos');
@@ -664,11 +664,11 @@ export default {
                 if(res.data.getDetail){
                     this.customerName = res.data.tableorder.customer.name;
                     this.contactNumber = res.data.tableorder.customer.phone;
-                    this.customerEmail = res.data.tableorder.customer.email;    
+                    this.customerEmail = res.data.tableorder.customer.email;
                 }else{
                     this.customerName = '';
                     this.contactNumber = '';
-                    this.customerEmail = '';  
+                    this.customerEmail = '';
                 }
             }).catch((error) => {})
 
@@ -694,11 +694,11 @@ export default {
                 if(res.data.getDetail){
                     this.customerName = res.data.customer.name;
                     this.contactNumber = res.data.customer.phone;
-                    this.customerEmail = res.data.customer.email;    
+                    this.customerEmail = res.data.customer.email;
                 }else{
                     // this.customerName = '';
                     // this.contactNumber = '';
-                    // this.customerEmail = '';  
+                    // this.customerEmail = '';
                 }
             }).catch((error) => {})
             }

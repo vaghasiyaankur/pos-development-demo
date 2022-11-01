@@ -60,9 +60,9 @@
                                 </div>
                                 <div class="card-footer border-top-0 pt-2 pb-2 px-2">
                                     <div class="d-flex justify-content-between" v-if="!removeOrderLoader.includes(key)">
-                                        <button class="btn btn-green fs-12 fw-medium" :disabled="order.ordered == 1" @click="orderSave(key,order.tableId)" v-if="allpermissions.OrdersSaved">{{ order.ordered == 1 ? 'served' : 'serve' }}</button>
-                                        <button class="btn btn-danger fs-12 fw-medium" v-if="allpermissions.OrdersPayed" @click="orderPay(key,order.tableId)">Pay</button>
-                                        <button class="btn btn-black" @click="printOrder(order.tableId)" v-if="allpermissions.OrdersPrint">
+                                        <button class="btn btn-green fs-12 fw-medium" :disabled="order.ordered == 1" @click="orderSave(key,order.tableId)" >{{ order.ordered == 1 ? 'served' : 'serve' }}</button>
+                                        <button class="btn btn-danger fs-12 fw-medium" @click="orderPay(key,order.tableId)">Pay</button>
+                                        <button class="btn btn-black" @click="printOrder(order.tableId)" >
                                             <i class="fa-solid fa-print"></i>
                                         </button>
                                     </div>

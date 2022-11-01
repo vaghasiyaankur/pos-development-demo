@@ -282,68 +282,70 @@ export default {
         },
         addeditproduct(){
 
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data' }
+            // }
 
-            var ingredient = this.selectIngredients.map(item => item.id);
-
-
-            var category = this.allcategories;
-            var categoryId = Object.keys(category).find(key => category[key] === this.categoryName);
-            if(categoryId == undefined){
-                categoryId = '';
-                if(this.product.name && this.product.price && this.product.image && categoryId == undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please select any one category",'error'); return false; }
-            }
+            // var ingredient = this.selectIngredients.map(item => item.id);
 
 
-
-            if(!this.product.name && this.product.price && this.product.image && categoryId != undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please enter your product name.",'error'); return false; }
-
-            if(this.product.name && !this.product.price && this.product.image && categoryId != undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please enter your product price.",'error'); return false; }
-
-            if(this.product.name && this.product.price && !this.product.image && categoryId != undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please enter your product image.",'error');  return false; }
-
-            if(this.product.name && this.product.price && !this.product.image && categoryId != undefined && this.selectSizes.length == 0){ this.$emit("showToast","Please select any one size of product.",'error'); return false; }
-
-            if(!this.product.name || !this.product.price || !this.product.image || categoryId == undefined || this.selectSizes.length == 0){ this.$emit("showToast","Please fill out form details.",'error'); return false;}
+            // var category = this.allcategories;
+            // var categoryId = Object.keys(category).find(key => category[key] === this.categoryName);
+            // if(categoryId == undefined){
+            //     categoryId = '';
+            //     if(this.product.name && this.product.price && this.product.image && categoryId == undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please select any one category",'error'); return false; }
+            // }
 
 
-            var formData = new FormData();
-            formData.append('category_slug', this.$route.params.slug);
-            formData.append('id', this.product.id);
-            formData.append('name', this.product.name);
-            formData.append('description', this.product.description);
-            formData.append('price', this.product.price);
-            formData.append('image', this.product.image);
-            formData.append('status', this.product.status);
-            formData.append('foodType', this.product.foodType);
-            formData.append('categoryId', categoryId);
-            formData.append('ingredient', ingredient);
 
-            this.selectSizesPrice.forEach((element, index) => {
-                 formData.append('sizes['+index+']', element);
-            });
+            // if(!this.product.name && this.product.price && this.product.image && categoryId != undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please enter your product name.",'error'); return false; }
 
-            axios
-            .post("/api/addproduct",formData,config)
-            .then((res) => {
-                this.$emit("showToast",res.data.success,"success");
-                var category = res.data.category.slug;
-                this.$router.push(`/products/`+category);
-            }).catch((error) => {
-                if(error.response){
-                    var errors = error.response.data.error
-                    var data = this.errors;
-                    if (errors) {
-                    data.product.name = errors.name && errors.name[0];
-                    data.product.price = errors.price && errors.price[0];
-                    data.product.image = errors.image && errors.image[0];
-                    data.product.categoryName = errors.categoryId && errors.categoryId[0];
+            // if(this.product.name && !this.product.price && this.product.image && categoryId != undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please enter your product price.",'error'); return false; }
 
-                }
-                }
-            })
+            // if(this.product.name && this.product.price && !this.product.image && categoryId != undefined && this.selectSizes.length != 0){ this.$emit("showToast","Please enter your product image.",'error');  return false; }
+
+            // if(this.product.name && this.product.price && !this.product.image && categoryId != undefined && this.selectSizes.length == 0){ this.$emit("showToast","Please select any one size of product.",'error'); return false; }
+
+            // if(!this.product.name || !this.product.price || !this.product.image || categoryId == undefined || this.selectSizes.length == 0){ this.$emit("showToast","Please fill out form details.",'error'); return false;}
+
+
+            // var formData = new FormData();
+            // formData.append('category_slug', this.$route.params.slug);
+            // formData.append('id', this.product.id);
+            // formData.append('name', this.product.name);
+            // formData.append('description', this.product.description);
+            // formData.append('price', this.product.price);
+            // formData.append('image', this.product.image);
+            // formData.append('status', this.product.status);
+            // formData.append('foodType', this.product.foodType);
+            // formData.append('categoryId', categoryId);
+            // formData.append('ingredient', ingredient);
+
+            // this.selectSizesPrice.forEach((element, index) => {
+            //      formData.append('sizes['+index+']', element);
+            // });
+
+            // axios
+            // .post("/api/addproduct",formData,config)
+            // .then((res) => {
+            //     this.$emit("showToast",res.data.success,"success");
+            //     var category = res.data.category.slug;
+            //     this.$router.push(`/products/`+category);
+            // }).catch((error) => {
+            //     if(error.response){
+            //         var errors = error.response.data.error
+            //         var data = this.errors;
+            //         if (errors) {
+            //         data.product.name = errors.name && errors.name[0];
+            //         data.product.price = errors.price && errors.price[0];
+            //         data.product.image = errors.image && errors.image[0];
+            //         data.product.categoryName = errors.categoryId && errors.categoryId[0];
+
+            //     }
+            //     }
+            // })
 
 
         },

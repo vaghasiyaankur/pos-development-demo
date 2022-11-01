@@ -305,98 +305,101 @@ export default {
                 })
         },
         adduser() {
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
 
-            var formData = new FormData();
-            formData.append('id', this.user.id);
-            formData.append('name', this.user.name);
-            formData.append('email', this.user.email);
-            formData.append('password', this.user.password);
-            formData.append('password_confirmation', this.user.password_confirmation);
-            formData.append('type', this.user.type);
-            formData.append('photo', this.user.photo);
-            formData.append('govt_id', this.user.govt_id);
-            if (this.user.id) {
-                axios
-                    .post("/api/edituser", formData, config)
-                    .then((res) => {
-                        this.$emit("showToast",res.data.success,'success');
-                        document.getElementById('close-button').click();
-                        // this.$emit('addLoader');
-                        this.getuserlist();
-                    }).catch((error) => {
-                         var errors = error.response.data.error
-                        var data = this.errors;
-                        if (errors) {
-                            if(errors.name && errors.name[0] && !errors.type && !errors.photo && !errors.govt_id){
-                                this.$emit("showToast",errors.name[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && errors.type && errors.type[0] && !errors.photo && !errors.govt_id){
-                                this.$emit("showToast",errors.type[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && !errors.type && errors.photo && errors.photo[0] && !errors.govt_id){
-                                this.$emit("showToast",errors.photo[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && !errors.type && !errors.photo && errors.govt_id && errors.govt_id[0]){
-                                this.$emit("showToast",errors.govt_id[0],'error');
-                                return false;
-                            }
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data' }
+            // }
 
-                            if(errors.name || errors.type || errors.photo || errors.govt_id){
-                                this.$emit("showToast","Please fill out form details.",'error');
-                                return false;
-                            }
-                        }
-                    })
-            } else {
-                axios
-                    .post("/api/adduser", formData, config)
-                    .then((res) => {
-                        this.$emit("showToast",res.data.success,'success');
-                        document.getElementById('close-button').click();
-                        // this.$emit('addLoader');
-                        this.getuserlist();
-                    }).catch((error) => {
-                        var errors = error.response.data.error
-                        var data = this.errors;
-                        if (errors) {
-                            if(errors.name && errors.name[0] && !errors.password && !errors.password_confirmation && !errors.type && !errors.photo && !errors.govt_id){
-                                this.$emit("showToast",errors.name[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && errors.password && errors.password[0] && !errors.password_confirmation && !errors.type && !errors.photo && !errors.govt_id){
-                                this.$emit("showToast",errors.password[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && !errors.password && errors.password_confirmation && errors.password_confirmation[0] && !errors.type && !errors.photo && !errors.govt_id){
-                                this.$emit("showToast",errors.password_confirmation[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && !errors.password && !errors.password_confirmation && errors.type && errors.type[0] && !errors.photo && !errors.govt_id){
-                                this.$emit("showToast",errors.type[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && !errors.password && !errors.password_confirmation && !errors.type && errors.photo && errors.photo[0] && !errors.govt_id){
-                                this.$emit("showToast",errors.photo[0],'error');
-                                return false;
-                            }
-                            if(!errors.name && !errors.password && !errors.password_confirmation && !errors.type && !errors.photo && errors.govt_id && errors.govt_id[0]){
-                                this.$emit("showToast",errors.govt_id[0],'error');
-                                return false;
-                            }
+            // var formData = new FormData();
+            // formData.append('id', this.user.id);
+            // formData.append('name', this.user.name);
+            // formData.append('email', this.user.email);
+            // formData.append('password', this.user.password);
+            // formData.append('password_confirmation', this.user.password_confirmation);
+            // formData.append('type', this.user.type);
+            // formData.append('photo', this.user.photo);
+            // formData.append('govt_id', this.user.govt_id);
+            // if (this.user.id) {
+            //     axios
+            //         .post("/api/edituser", formData, config)
+            //         .then((res) => {
+            //             this.$emit("showToast",res.data.success,'success');
+            //             document.getElementById('close-button').click();
+            //             // this.$emit('addLoader');
+            //             this.getuserlist();
+            //         }).catch((error) => {
+            //              var errors = error.response.data.error
+            //             var data = this.errors;
+            //             if (errors) {
+            //                 if(errors.name && errors.name[0] && !errors.type && !errors.photo && !errors.govt_id){
+            //                     this.$emit("showToast",errors.name[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && errors.type && errors.type[0] && !errors.photo && !errors.govt_id){
+            //                     this.$emit("showToast",errors.type[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && !errors.type && errors.photo && errors.photo[0] && !errors.govt_id){
+            //                     this.$emit("showToast",errors.photo[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && !errors.type && !errors.photo && errors.govt_id && errors.govt_id[0]){
+            //                     this.$emit("showToast",errors.govt_id[0],'error');
+            //                     return false;
+            //                 }
 
-                            if(errors.name || errors.password || errors.password_confirmation || errors.type || errors.photo || errors.govt_id){
-                                this.$emit("showToast","Please fill out form details.",'error');
-                                return false;
-                            }
-                        }
-                    })
-            }
+            //                 if(errors.name || errors.type || errors.photo || errors.govt_id){
+            //                     this.$emit("showToast","Please fill out form details.",'error');
+            //                     return false;
+            //                 }
+            //             }
+            //         })
+            // } else {
+            //     axios
+            //         .post("/api/adduser", formData, config)
+            //         .then((res) => {
+            //             this.$emit("showToast",res.data.success,'success');
+            //             document.getElementById('close-button').click();
+            //             // this.$emit('addLoader');
+            //             this.getuserlist();
+            //         }).catch((error) => {
+            //             var errors = error.response.data.error
+            //             var data = this.errors;
+            //             if (errors) {
+            //                 if(errors.name && errors.name[0] && !errors.password && !errors.password_confirmation && !errors.type && !errors.photo && !errors.govt_id){
+            //                     this.$emit("showToast",errors.name[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && errors.password && errors.password[0] && !errors.password_confirmation && !errors.type && !errors.photo && !errors.govt_id){
+            //                     this.$emit("showToast",errors.password[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && !errors.password && errors.password_confirmation && errors.password_confirmation[0] && !errors.type && !errors.photo && !errors.govt_id){
+            //                     this.$emit("showToast",errors.password_confirmation[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && !errors.password && !errors.password_confirmation && errors.type && errors.type[0] && !errors.photo && !errors.govt_id){
+            //                     this.$emit("showToast",errors.type[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && !errors.password && !errors.password_confirmation && !errors.type && errors.photo && errors.photo[0] && !errors.govt_id){
+            //                     this.$emit("showToast",errors.photo[0],'error');
+            //                     return false;
+            //                 }
+            //                 if(!errors.name && !errors.password && !errors.password_confirmation && !errors.type && !errors.photo && errors.govt_id && errors.govt_id[0]){
+            //                     this.$emit("showToast",errors.govt_id[0],'error');
+            //                     return false;
+            //                 }
+
+            //                 if(errors.name || errors.password || errors.password_confirmation || errors.type || errors.photo || errors.govt_id){
+            //                     this.$emit("showToast","Please fill out form details.",'error');
+            //                     return false;
+            //                 }
+            //             }
+            //         })
+            // }
 
 
         },

@@ -23,13 +23,13 @@
                     <div class="card-bottom px-2 pb-2 text-center border-0">
                         <ul class="list-inline mb-0 d-flex justify-content-between align-items-center">
                             <li class="list-inline-item">
-                                <a href="javascript:;" class="align-middle"  data-bs-toggle="modal" data-bs-target="#removedataalert"  @click="removeCategory(item.id)" v-if="allpermissions.CategoryDelete"><i class="fa-solid fa-trash-can text-success"></i></a>
+                                <a href="javascript:;" class="align-middle"  data-bs-toggle="modal" data-bs-target="#removedataalert"  @click="removeCategory(item.id)" ><i class="fa-solid fa-trash-can text-success"></i></a>
                             </li>
                             <li class="list-inline-item">
                             <router-link class="align-middle fs-10 color-gray" :to="{name: 'Product', params: {'slug': item.slug}}">{{ item.products_count}} items</router-link>
                             </li>
                             <li class="list-inline-item">
-                                <a href="javascript:;" class="align-middle" data-bs-toggle="modal" data-bs-target="#addeditcategory" @click="openEditPopup(item.id)" v-if="allpermissions.CategoryEdit"><i class="fa-solid fa-pen-to-square text-success"></i></a>
+                                <a href="javascript:;" class="align-middle" data-bs-toggle="modal" data-bs-target="#addeditcategory" @click="openEditPopup(item.id)" ><i class="fa-solid fa-pen-to-square text-success"></i></a>
                             </li>
                         </ul>
                     </div>

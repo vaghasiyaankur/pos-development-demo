@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body px-2" :class="latest_orders.length < 1 ? 'noorder-card-body' : ''">
-                                    <div class="card-items-details d-flex align-items-center justify-content-between my-2 px-2 py-1" v-for="(latest_order,index) in latest_orders.slice(0,5)" :key="latest_order">
+                                    <div class="card-items-details d-flex align-items-center justify-content-between my-2 px-2 py-1" v-for="(latest_order,index) in latest_orders" :key="latest_order">
                                         <p class="mb-0 fs-16 pe-3">{{index + 1}}.</p>
                                         <p class="mb-0 fs-16 title--name--clamp">Order # {{latest_order.id}}</p>
                                         <p class="mb-0 fs-16 white--space">{{ currencySymbol }} {{ (latest_order.total_amount).toFixed(2) }}</p>
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer text-center border-top-0">
-                                    <router-link to="/orders" class="btn btn-success fs-16" v-if="latest_orders.length > 5">View All</router-link>
+                                    <router-link to="/orders" class="btn btn-success fs-16" v-if="latest_orders.length > 4">View All</router-link>
                                 </div>
                             </div>
                         </div>

@@ -141,56 +141,59 @@ import { useToast } from "vue-toastification";
                 })
             },
             taxAddUpdate(){
-                var type = $(".tax-type.active").data('type');
-                var name = this.name;
-                if(type == 'percentage'){
-                    var value = this.valueper;
-                }
-                if(type == 'flat'){
-                    var value = this.valueflat;
-                }
 
-                if(value == '' && name != ''){ this.$emit('showToast',"Please Enter Tax Charge",'error'); return false;}
-                if(value != '' && name == ''){ this.$emit('showToast',"Please Enter Tax Name",'error'); return false;}
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+                // var type = $(".tax-type.active").data('type');
+                // var name = this.name;
+                // if(type == 'percentage'){
+                //     var value = this.valueper;
+                // }
+                // if(type == 'flat'){
+                //     var value = this.valueflat;
+                // }
 
-                if(type == 'percentage' && value){
-                    if(value > 100){this.$emit('showToast',"Please Enter Tax Percentage in 100",'error'); return false; }
-                    if(value < 1){this.$emit('showToast',"Please Enter Tax Percentage in 100",'error'); return false; }
-                }
+                // if(value == '' && name != ''){ this.$emit('showToast',"Please Enter Tax Charge",'error'); return false;}
+                // if(value != '' && name == ''){ this.$emit('showToast',"Please Enter Tax Name",'error'); return false;}
 
-                 if(type == 'flat' && value){
-                    value < 0 ? this.$emit('showToast',"Please Enter Positive value For tax price",'error') : '';
-                    if(value < 0)
-                    return ;
-                }
+                // if(type == 'percentage' && value){
+                //     if(value > 100){this.$emit('showToast',"Please Enter Tax Percentage in 100",'error'); return false; }
+                //     if(value < 1){this.$emit('showToast',"Please Enter Tax Percentage in 100",'error'); return false; }
+                // }
 
-                if(value == '' || name == ''){ this.$emit('showToast',"Please fill out form details.",'error'); return false;}
+                //  if(type == 'flat' && value){
+                //     value < 0 ? this.$emit('showToast',"Please Enter Positive value For tax price",'error') : '';
+                //     if(value < 0)
+                //     return ;
+                // }
 
-                var button = event.target;
-                button.disabled = true;
-                button.textContent = 'saving...';
+                // if(value == '' || name == ''){ this.$emit('showToast',"Please fill out form details.",'error'); return false;}
 
-                const config = {
-                    headers: { 'content-type': 'multipart/form-data' }
-                }
+                // var button = event.target;
+                // button.disabled = true;
+                // button.textContent = 'saving...';
 
-                var formData = new FormData();
-                formData.append('tax_type', type);
-                formData.append('tax_value', value);
-                formData.append('name', name);
-                formData.append('id', this.id);
-                formData.append('status', this.status);
+                // const config = {
+                //     headers: { 'content-type': 'multipart/form-data' }
+                // }
 
-                axios
-                .post("/api/tax-add-update",formData,config)
-                .then((res) => {
-                    this.$emit('showToast',res.data.success,"success");
-                    this.gettaxes();
-                    this.blankForm();
-                    button.disabled = false;
-                    button.textContent = 'save';
-                }).catch((error) => {
-                })
+                // var formData = new FormData();
+                // formData.append('tax_type', type);
+                // formData.append('tax_value', value);
+                // formData.append('name', name);
+                // formData.append('id', this.id);
+                // formData.append('status', this.status);
+
+                // axios
+                // .post("/api/tax-add-update",formData,config)
+                // .then((res) => {
+                //     this.$emit('showToast',res.data.success,"success");
+                //     this.gettaxes();
+                //     this.blankForm();
+                //     button.disabled = false;
+                //     button.textContent = 'save';
+                // }).catch((error) => {
+                // })
             },
             blankForm(){
                 this.id = 0;
@@ -205,21 +208,24 @@ import { useToast } from "vue-toastification";
                 $("#nav-light-flat").removeClass('active');
             },
             statusChange(id, value){
-                const config = {
-                    headers: { 'content-type': 'multipart/form-data' }
-                }
 
-                var formData = new FormData();
-                formData.append('id', id);
-                formData.append('value', value);
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+                // const config = {
+                //     headers: { 'content-type': 'multipart/form-data' }
+                // }
 
-                axios
-                .post("/api/tax-status-change",formData,config)
-                .then((res) => {
-                    this.$emit('showToast',"Status changed successfully.","success");
-                    this.gettaxes();
-                }).catch((error) => {
-                })
+                // var formData = new FormData();
+                // formData.append('id', id);
+                // formData.append('value', value);
+
+                // axios
+                // .post("/api/tax-status-change",formData,config)
+                // .then((res) => {
+                //     this.$emit('showToast',"Status changed successfully.","success");
+                //     this.gettaxes();
+                // }).catch((error) => {
+                // })
             },
             getSingleData(id){
                 const config = {
@@ -244,15 +250,18 @@ import { useToast } from "vue-toastification";
                 })
             },
             removeData(){
-                var formData = new FormData();
-                formData.append('id', this.deleteId);
-                axios
-                .post("/api/tax-delete",formData)
-                .then((res) => {
-                    this.$emit('showToast',"Tax  deleted successfully.","success");
-                    this.gettaxes();
-                }).catch((error) => {
-                })
+
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+                // var formData = new FormData();
+                // formData.append('id', this.deleteId);
+                // axios
+                // .post("/api/tax-delete",formData)
+                // .then((res) => {
+                //     this.$emit('showToast',"Tax  deleted successfully.","success");
+                //     this.gettaxes();
+                // }).catch((error) => {
+                // })
             }
 
 

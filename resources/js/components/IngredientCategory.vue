@@ -9,7 +9,7 @@
                         <h4 class="mb-sm-0">Ingredient Categories Management</h4>
                         <div class="page-title-right">
                             <button class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#addeditingcategory" @click="blankForm()" v-if="allpermissions.IngredientCategoryAdd"><i class="ri-add-fill me-1 align-bottom"></i> Add Ingredient</button>
+                                data-bs-target="#addeditingcategory" @click="blankForm()" ><i class="ri-add-fill me-1 align-bottom"></i> Add Ingredient</button>
                         </div>
                         <!-- Modal For AddeditIngredientCategory Start-->
                         <div class="modal fade" id="addeditingcategory" ref="modalTest" tabindex="-1" aria-hidden="true">
@@ -87,13 +87,13 @@
                                 <div class="card-bottom px-2 pb-2 text-center border-0">
                                     <ul class="list-inline mb-0 d-flex align-items-center" :class="ingcategory.name == 'size' ? 'justify-content-center' : 'justify-content-between' ">
                                         <li class="list-inline-item" v-if="ingcategory.name != 'size'">
-                                            <a href="javascript:;" class="align-middle"  data-bs-toggle="modal" data-bs-target="#removedataalert"  @click="ingCatId = ingcategory.id" v-if="allpermissions.IngredientCategoryDelete"><i class="fa-solid fa-trash-can text-success"></i></a>
+                                            <a href="javascript:;" class="align-middle"  data-bs-toggle="modal" data-bs-target="#removedataalert"  @click="ingCatId = ingcategory.id" ><i class="fa-solid fa-trash-can text-success"></i></a>
                                         </li>
                                         <li class="list-inline-item">
                                         <router-link class="mb-0 color-gray" :to="{name: 'Ingredient', params: {'slug': ingcategory.slug}}">{{ ingcategory.ingredients_count }} items</router-link>
                                         </li>
                                         <li class="list-inline-item" v-if="ingcategory.name != 'size'" >
-                                            <a href="javascript:;" class="align-middle" data-bs-toggle="modal" data-bs-target="#addeditingcategory" @click="getIngredientCategorySingleData(ingcategory.id)" v-if="allpermissions.IngredientCategoryEdit"><i class="fa-solid fa-pen-to-square text-success"></i></a>
+                                            <a href="javascript:;" class="align-middle" data-bs-toggle="modal" data-bs-target="#addeditingcategory" @click="getIngredientCategorySingleData(ingcategory.id)" ><i class="fa-solid fa-pen-to-square text-success"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -164,35 +164,38 @@ export default {
         },
         addeditingcategory(){
 
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
 
-            if(!this.ingcategory.name){ this.$emit("showToast",'Please enter ingredient category name.','error'); return false;}
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data' }
+            // }
 
-            var formData = new FormData();
-            formData.append('id', this.ingcategory.id);
-            formData.append('name', this.ingcategory.name);
-            formData.append('status', this.ingcategory.status);
-            if(this.ingcategory.id){
-                axios
-                .post("/api/editingcategory",formData,config)
-                .then((res) => {
-                    this.$emit("showToast",res.data.success,'success');
-                   document.getElementById('close-button').click();
-                   this.getingcategorylist();
+            // if(!this.ingcategory.name){ this.$emit("showToast",'Please enter ingredient category name.','error'); return false;}
 
-                }).catch((error) => { })
-            }else{
-                axios
-                .post("/api/addingcategory",formData,config)
-                .then((res) => {
-                    this.$emit("showToast",res.data.success,'success');
-                   document.getElementById('close-button').click();
-                   this.getingcategorylist();
+            // var formData = new FormData();
+            // formData.append('id', this.ingcategory.id);
+            // formData.append('name', this.ingcategory.name);
+            // formData.append('status', this.ingcategory.status);
+            // if(this.ingcategory.id){
+            //     axios
+            //     .post("/api/editingcategory",formData,config)
+            //     .then((res) => {
+            //         this.$emit("showToast",res.data.success,'success');
+            //        document.getElementById('close-button').click();
+            //        this.getingcategorylist();
 
-                }).catch((error) => { })
-            }
+            //     }).catch((error) => { })
+            // }else{
+            //     axios
+            //     .post("/api/addingcategory",formData,config)
+            //     .then((res) => {
+            //         this.$emit("showToast",res.data.success,'success');
+            //        document.getElementById('close-button').click();
+            //        this.getingcategorylist();
+
+            //     }).catch((error) => { })
+            // }
 
 
         },
@@ -219,15 +222,18 @@ export default {
             })
         },
         removeData(){
-            var formData = new FormData();
-            formData.append('id', this.ingCatId);
-            axios
-            .post("/api/removeIngcategory",formData)
-            .then((res) => {
-                this.$emit("showToast",res.data.success,'success');
-                this.getingcategorylist();
-            }).catch((error) => {
-            })
+
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // var formData = new FormData();
+            // formData.append('id', this.ingCatId);
+            // axios
+            // .post("/api/removeIngcategory",formData)
+            // .then((res) => {
+            //     this.$emit("showToast",res.data.success,'success');
+            //     this.getingcategorylist();
+            // }).catch((error) => {
+            // })
         }
     }
 };

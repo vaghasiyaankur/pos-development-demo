@@ -12,7 +12,7 @@
                         <a href="javascript:;" @click="$router.go(-1)" class="text-success fs-16"><i class="ri-arrow-go-back-line "></i> Back</a>
                         <div class="add-catagory-btn">
                             <button class="btn btn-success fs-16 btn-custom" data-bs-toggle="modal"
-                                data-bs-target="#addeditcategory" @click="blankForm()" v-if="allpermissions.CategoryAdd"><i class="ri-add-fill me-1 align-bottom"></i> Add Category</button>
+                                data-bs-target="#addeditcategory" @click="blankForm()" ><i class="ri-add-fill me-1 align-bottom"></i> Add Category</button>
                         </div>
                     </div>
                 </div>
@@ -154,52 +154,54 @@ export default {
                 })
         },
         addeditcategory(){
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data' }
+            // }
 
-            var formData = new FormData();
-            formData.append('id', this.category.id);
-            formData.append('name', this.category.name);
-            formData.append('image', this.category.image);
-            formData.append('status', this.category.status);
-            if(this.category.id){
-                axios
-                .post("/api/editcategory",formData,config)
-                .then((res) => {
-                   document.getElementById('close-button').click();
-                   this.getcategorylist();
-                   this.$emit("showToast",res.data.success,'success');
+            // var formData = new FormData();
+            // formData.append('id', this.category.id);
+            // formData.append('name', this.category.name);
+            // formData.append('image', this.category.image);
+            // formData.append('status', this.category.status);
+            // if(this.category.id){
+            //     axios
+            //     .post("/api/editcategory",formData,config)
+            //     .then((res) => {
+            //        document.getElementById('close-button').click();
+            //        this.getcategorylist();
+            //        this.$emit("showToast",res.data.success,'success');
 
-                }).catch((error) => {
-                    var errors = error.response.data.error
-                    var data = this.errors;
-                    if (errors) {
-                        if(errors.name && errors.name[0] && !errors.image) this.$emit("showToast",errors.name[0],"error");
+            //     }).catch((error) => {
+            //         var errors = error.response.data.error
+            //         var data = this.errors;
+            //         if (errors) {
+            //             if(errors.name && errors.name[0] && !errors.image) this.$emit("showToast",errors.name[0],"error");
 
-                        if(!errors.name && errors.image && errors.image[0]) this.$emit("showToast",errors.image[0],"error");
+            //             if(!errors.name && errors.image && errors.image[0]) this.$emit("showToast",errors.image[0],"error");
 
-                        if(errors.name && errors.image) this.$emit("showToast","Please fill out form details.","error");
-                    }
-                })
-            }else{
-                axios
-                .post("/api/addcategory",formData,config)
-                .then((res) => {
-                   document.getElementById('close-button').click();
-                   this.getcategorylist();
-                    this.$emit("showToast",res.data.success,'success');
-                }).catch((error) => {
-                    var errors = error.response.data.error
-                    if (errors) {
-                        if(errors.name && errors.name[0] && !errors.image) this.$emit("showToast",errors.name[0],"error");
+            //             if(errors.name && errors.image) this.$emit("showToast","Please fill out form details.","error");
+            //         }
+            //     })
+            // }else{
+            //     axios
+            //     .post("/api/addcategory",formData,config)
+            //     .then((res) => {
+            //        document.getElementById('close-button').click();
+            //        this.getcategorylist();
+            //         this.$emit("showToast",res.data.success,'success');
+            //     }).catch((error) => {
+            //         var errors = error.response.data.error
+            //         if (errors) {
+            //             if(errors.name && errors.name[0] && !errors.image) this.$emit("showToast",errors.name[0],"error");
 
-                        if(!errors.name && errors.image && errors.image[0]) this.$emit("showToast",errors.image[0],"error");
+            //             if(!errors.name && errors.image && errors.image[0]) this.$emit("showToast",errors.image[0],"error");
 
-                        if(errors.name && errors.image) this.$emit("showToast","Please fill out form details.","error");
-                    }
-                })
-            }
+            //             if(errors.name && errors.image) this.$emit("showToast","Please fill out form details.","error");
+            //         }
+            //     })
+            // }
 
 
         },
@@ -252,15 +254,18 @@ export default {
         this.removecat = id;
       },
       removeData(){
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-        }
-        axios.post('/api/deleteCategoryData',{id: this.removecat},config)
-        .then(res => {
-            this.$emit("showToast","Category deleted successfully",'success');
-            this.categories = res.data.content;
-        }).catch(err => {
-        })
+
+        this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+        // const config = {
+        //     headers: { 'content-type': 'multipart/form-data' }
+        // }
+        // axios.post('/api/deleteCategoryData',{id: this.removecat},config)
+        // .then(res => {
+        //     this.$emit("showToast","Category deleted successfully",'success');
+        //     this.categories = res.data.content;
+        // }).catch(err => {
+        // })
       }
     }
 };

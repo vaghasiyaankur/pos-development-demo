@@ -196,10 +196,8 @@ class UserManagementController extends Controller
      */
     public function userPasscode()
     {
-        $user = Auth::user();
-        $indexper = Permission::where('function', 'Index')->where($user->type, 1)->count();
-        
-        return response()->json(['passcode' => @$user->lock_pin, 'indexpermission' => $indexper]);
+        $indexper = Permission::where('function', 'Index')->count();
+        return response()->json(['passcode' => 0000, 'indexpermission' => $indexper]);
     }
 
     /**
@@ -209,7 +207,7 @@ class UserManagementController extends Controller
     */
     public function lockEnableDisable(Request $request)
     {
-        $update = User::where('id', Auth::user()->id)->update(['lock_enable' => $request->lock]);
+        // $update = User::where('id', Auth::user()->id)->update(['lock_enable' => $request->lock]);
         return 'success';
     }
 }

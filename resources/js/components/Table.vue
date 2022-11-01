@@ -33,7 +33,7 @@
                                             <h5 class=" mb-1 color--blue">Empty</h5>
                                         </div>
                                         <p class="mb-0 color--blue d-flex justify-content-center align-items-center pb-2">Capacity of Person - {{table.capacity}}</p>
-                                        <div class="d-flex justify-content-end pe-2"  v-if="allpermissions.TableStatus">
+                                        <div class="d-flex justify-content-end pe-2"  v-if="allpermissions.TableStatus" >
                                             <label class="switch" :for="'tableStatus_'+table.id">
                                                 <input type="checkbox" :id="'tableStatus_'+table.id" @change="activeDeactive(table.id,$event)" :checked="table.current == 'Available'" />
                                                 <div class="slider round"></div>
@@ -90,7 +90,7 @@
                         Back
                     </a>
                     <div class="add-catagory-btn">
-                        <button class="btn btn-success fs-16 btn-custom" data-bs-toggle="modal" data-bs-target="#exampleModalgrid" v-if="allpermissions.TableAdd">
+                        <button class="btn btn-success fs-16 btn-custom" data-bs-toggle="modal" data-bs-target="#exampleModalgrid" >
                             + Add Table
                         </button>
                     </div>
@@ -227,38 +227,39 @@ export default {
           })
     },
     async addtable(){
+        this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+        return false;
+        // const config = {
+        //     headers: { 'content-type': 'multipart/form-data' }
+        // }
 
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-        }
+        // if(!this.popup.number && this.popup.capacity && this.popup.color){ this.$emit('showToast',"Please add table name.",'error'); return false; }
+        // if(this.popup.number && !this.popup.capacity && this.popup.color){ this.$emit('showToast',"Please add capacity for table member.",'error'); return false; }
+        // if(this.popup.number && this.popup.capacity && !this.popup.color){ this.$emit('showToast',"Please add table color.",'error'); return false; }
 
-        if(!this.popup.number && this.popup.capacity && this.popup.color){ this.$emit('showToast',"Please add table name.",'error'); return false; }
-        if(this.popup.number && !this.popup.capacity && this.popup.color){ this.$emit('showToast',"Please add capacity for table member.",'error'); return false; }
-        if(this.popup.number && this.popup.capacity && !this.popup.color){ this.$emit('showToast',"Please add table color.",'error'); return false; }
+        // if(!this.popup.number || !this.popup.capacity || !this.popup.color){ this.$emit('showToast',"Please fill out form details.",'error'); return false; }
 
-        if(!this.popup.number || !this.popup.capacity || !this.popup.color){ this.$emit('showToast',"Please fill out form details.",'error'); return false; }
+        // // console.log(this.popup.color);
+        // var formData = new FormData();
+        // formData.append('number', this.popup.number);
+        // formData.append('capacity', this.popup.capacity);
+        // formData.append('status', this.popup.status);
+        // formData.append('color', this.popup.color);
 
-        // console.log(this.popup.color);
-        var formData = new FormData();
-        formData.append('number', this.popup.number);
-        formData.append('capacity', this.popup.capacity);
-        formData.append('status', this.popup.status);
-        formData.append('color', this.popup.color);
+        // await axios
+        // .post("/api/addtable", formData, config)
+        // .then((res) => {
+        //     this.$emit("showToast","Table added successfully",'success');
+        //     document.getElementById('close-button').click();
+        //     this.gettabledata();
+        //     this.blankPopupForm();
 
-        await axios
-        .post("/api/addtable", formData, config)
-        .then((res) => {
-            this.$emit("showToast","Table added successfully",'success');
-            document.getElementById('close-button').click();
-            this.gettabledata();
-            this.blankPopupForm();
-
-        }).catch((error) => {
-            var errors = error.response.data.error
-            var data = this.errors;
-            if (errors) {
-            }
-        })
+        // }).catch((error) => {
+        //     var errors = error.response.data.error
+        //     var data = this.errors;
+        //     if (errors) {
+        //     }
+        // })
     },
     blankPopupForm(){
         this.popup.number = '';
@@ -268,19 +269,22 @@ export default {
         // $("input:radio[name=language]:checked")[0].checked = false;
     },
     async activeDeactive(id,event){
-        this.addLoader = true;
-        if(event.target.checked){
-            var status = 'Available';
-        }else{
-            var status = 'Deactive';
-        }
-        await axios.post('/api/changeTableStatus',{id : id,status : status})
-          .then(res => {
-            this.gettabledata();
-            this.$emit('showToast',"Table status changed successfully",'success');
-            setTimeout(() => this.addLoader = false, 2000);
-          }).catch(err => {
-          })
+        
+        this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+        return false;
+        // this.addLoader = true;
+        // if(event.target.checked){
+        //     var status = 'Available';
+        // }else{
+        //     var status = 'Deactive';
+        // }
+        // await axios.post('/api/changeTableStatus',{id : id,status : status})
+        //   .then(res => {
+        //     this.gettabledata();
+        //     this.$emit('showToast',"Table status changed successfully",'success');
+        //     setTimeout(() => this.addLoader = false, 2000);
+        //   }).catch(err => {
+        //   })
     },
     // gettabledataforpopup(table){
     //   axios.get('/api/gettabledataforpopup/'+table)

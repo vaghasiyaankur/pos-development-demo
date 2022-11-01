@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="complete-order-card pb-5 mb-5" v-else>
-                            <div class="card single-order-card border-radius-10 mb-2" v-for="order in completed_orders" :key="order.id" :class="{ 'active': activeOrder == order.id }" @click="activeOrder = order.id;getOrderProduct(order.id,order.table_order.table_id)">
+                            <div class="card single-order-card border-radius-10 mb-2" v-for="order in completed_orders" :key="order.id" :class="{ 'active': activeOrder == order.id }" @click="activeOrder = order.id;getOrderProduct(order.id)">
                                 <div class="card-body d-flex justify-content-between py-2 ">
                                     <div class="card--order-detail">
                                         <h6 class="fs-14 text-success mb-1">Order #{{order.id}}</h6>
@@ -199,22 +199,21 @@ export default {
             axios.get('/api/getcompleteorderddata')
                 .then(res => {
                     this.completed_orders = res.data.completed_orders;
-                    console.log(this.completed_orders.length);
                     if(this.completed_orders.length != 0){
                         setTimeout(() => {
                             this.datepicker();
                         }, 3000);
                     }
                     this.$emit('removeLoader');
-                    var orderId = this.completed_orders[0].id;
-                    var tableId = this.completed_orders[0].table_order.table_id;
-                    this.activeOrder = orderId;
-                    this.getOrderProduct(orderId, tableId);
+                    // var orderId = this.completed_orders[0].id;
+                    // var tableId = this.completed_orders[0].table_order.table_id;
+                    this.activeOrder = res.data.first_array;
+                    this.getOrderProduct(res.data.first_array);
                 }).catch(err => {})
         },
-        getOrderProduct(tableId,orderId){
+        getOrderProduct(orderId){
             this.addproductLoader = true;
-            axios.get('/api/getOrderProduct/'+orderId+'/'+tableId)
+            axios.get('/api/getOrderProduct/'+orderId)
                 .then(res => {
                     this.orderProduct = res.data.products.data;
                     this.activeOrderId = res.data.products.id;
@@ -241,17 +240,19 @@ export default {
                 .catch((err) => {});
         },
         emailInvoice(id){
-            $("#emailInvoiceButton").attr('disabled','disabled');
-            const config = {
-                headers: { 'content-type': 'multipart/form-data'}
-            }
-            axios.post('/api/emailInvoice',{id: id},config)
-            .then(res => {
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // $("#emailInvoiceButton").attr('disabled','disabled');
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data'}
+            // }
+            // axios.post('/api/emailInvoice',{id: id},config)
+            // .then(res => {
 
-                $("#emailInvoiceButton").removeAttr('disabled');
-                this.$emit("showToast","Mail Send successfully",'success');
-            }).catch(err => {
-            })
+            //     $("#emailInvoiceButton").removeAttr('disabled');
+            //     this.$emit("showToast","Mail Send successfully",'success');
+            // }).catch(err => {
+            // })
         },
         orderForPrinting() {
 
@@ -300,10 +301,10 @@ export default {
                 })
                 .then((res) => {
                     this.completed_orders = res.data.completed_orders;
-                    var orderId = this.completed_orders[0].id;
-                    var tableId = this.completed_orders[0].table_order.table_id;
-                    this.activeOrder = orderId;
-                    this.getOrderProduct(orderId,tableId);
+                    // var orderId = this.completed_orders[0].id;
+                    // var tableId = this.completed_orders[0].table_order.table_id;
+                    this.activeOrder = res.data.first_array;
+                    this.getOrderProduct(res.data.first_array);
                     this.addLoader = false;
                 }).catch((error) => {})
         },

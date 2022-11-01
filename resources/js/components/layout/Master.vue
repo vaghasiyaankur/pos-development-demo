@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header  :image_url="image_url"></Header>
+        <Header  v-if="!isLogin && !isLock" :allpermissions="allpermissions" :image_url="image_url"></Header>
 
         <router-view :allpermissions="allpermissions" :currencyCode="currencyCode" @addLoader="addLoader" @removeLoader="removeLoader"  @showToast="showToast"></router-view>
             <div class="overlay">
@@ -51,7 +51,7 @@ export default {
             }, 2000)
         });
 
-        await this.recentOrder();
+        // await this.recentOrder();
         this.getsetting();
 
         axios.get('/api/checkheaderpermission')

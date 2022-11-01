@@ -139,7 +139,7 @@ class PosController extends Controller
      */
     public function getCart(Request $request)
     {
-        // $stores = session()->put('demoCartData', []);
+        // $stores = session()->forget('demoOrderData');
         $stores = session()->get('demoCartData');
         $cartData = [];
         $total = 0;
@@ -228,9 +228,9 @@ class PosController extends Controller
      */
     public function saveOrder(Request $request)
     {
-        // session()->forget('demoOrderData');
-        // session()->forget('demoCartData');
-        // dd('1');
+            // session()->forget('demoOrderData');
+            // session()->forget('demoCartData');
+            // return 21;
         // dd(session()->get('demoCartData'));
         $cartProduct = session()->get('demoCartData');
         $cartData = [];
@@ -276,18 +276,18 @@ class PosController extends Controller
         $stores = session()->get('demoOrderData');
 
         $table = Table::where('number',$request->orderTable)->first();
-        $fullOrder['table'][$table->id] = [];
+        $fullOrder = [];
         $demoOrderData = ['pay_amount' => $total, 'total_amount' => $total, 'purchase_type' => $purchaseType, 'description' => $description];
         // dd($cartProduct);
         $orderproduct = [];
         foreach($cartProduct as $key=>$data){
             $ingredients = explode(',', $data['ingredient']);
             $orderproducting = [];
-             foreach($ingredients as $ik => $ingredient){
+            foreach($ingredients as $ik => $ingredient){
                 if($ingredient){
                    $orderproducting[$ik] = $ingredient;
                 }
-                }
+            }
 
 
                 if($data['combo'] == "true"){
@@ -303,10 +303,67 @@ class PosController extends Controller
 
             }
         $demoOrderData['order_product'] = $orderproduct;
+        $demoOrderData['created_at'] = \Carbon\Carbon::now();
         $rand = rand(10,1000);
-        $fullOrder['table'][$table->id]['order'][$rand] = $demoOrderData;
-        session()->push('demoOrderData', $fullOrder);
+        $loop = 0;
+        if($stores){
+            foreach($stores as $key => $store){
+                if($store['table'] == $table->id){
+                    if(array_key_exists($rand,$store)){
+                        $rand = rand(1000,2000);
+                        if(array_key_exists($rand,$store)){
+                            $rand = rand(2000,3000);
+                        }
+                    }
+
+                    $store[$rand] = $demoOrderData;
+                    $fullOrder[$key] = $store;
+                    $loop = 1;
+                }else{
+                    $fullOrder[$key] = $store;
+                }
+            }
+            if(!$loop){
+                $count = count($stores);
+                $fullOrder[$count]['table'] = $table->id;
+                $fullOrder[$count]['customer_name'] = $request->customerName;
+                $fullOrder[$count]['customer_number'] = $request->contactNumber;
+                $fullOrder[$count]['customer_email'] = $request->customerEmail;
+                $fullOrder[$count]['ordered'] = 0;
+                $fullOrder[$count][$rand] = $demoOrderData;
+            }
+
+        }else{
+            $fullOrder[0]['table'] = $table->id;
+            $fullOrder[0]['customer_name'] = $request->customerName;
+            $fullOrder[0]['customer_number'] = $request->contactNumber;
+            $fullOrder[0]['customer_email'] = $request->customerEmail;
+            $fullOrder[0]['ordered'] = 0;
+            $fullOrder[0][$rand] = $demoOrderData;
+        }
+        session()->forget('demoOrderData');
+        session()->put('demoOrderData', $fullOrder);
+        // dd($stores);
+        // if($stores){
+        //     foreach($stores as $k => $store){
+        //         foreach($store as $tid=>$orders){
+        //             if($table->id == $tid){
+        //                 $fullOrder[$k][$tid][$rand] = $demoOrderData;
+        //                 $loop = 1;
+
+        //     dd($fullOrder);
+        //                 session()->push('demoOrderData', $fullOrder[$k]);
+        //             }
+        //         }
+        //     }
+        // }
+        // if($loop == 0){
+        //     $fullOrder[$table->id][$rand] = $demoOrderData;
+        //     dd($fullOrder);
+        //     session()->push('demoOrderData', $fullOrder);
+        // }
         session()->forget('demoCartData');
+        // session()->forget('demoOrderData');
         // dd(session()->get('demoOrderData'));
         return 'success';
 
@@ -366,6 +423,7 @@ class PosController extends Controller
         // session()->forget('demoCartData');
         // return 'success';
     }
+    
 
     /**
      * Next Avilable Table Check For Reservation

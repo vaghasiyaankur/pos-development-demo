@@ -34,7 +34,8 @@ class TableSeeder extends Seeder
             Table::create([
                 'number' => $table,
                 'color' => $colors[$key],
-                'current' => Arr::random($current),
+                // 'current' => Arr::random($current),
+                'current' => $table == 3 || $table == 6 ? 'Deactive' : 'Available' ,
                 'capacity' => rand('1','10')
             ]);
         }

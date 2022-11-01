@@ -197,43 +197,46 @@ export default {
             }
         },
         addCombo(){
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
 
-            var formData = new FormData();
-            formData.append('name', this.combo.name);
-            formData.append('price', this.combo.price);
-            formData.append('foodType', this.combo.foodType);
-            formData.append('image', this.combo.image);
-            formData.append('products', this.selproduct);
-            formData.append('status', this.combo.status);
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data' }
+            // }
 
-            axios
-            .post("/api/addcombo",formData,config)
-            .then((res) => {
-                this.clearData();
-                this.$emit("showToast",res.data.success,"success");
-                this.$router.push(`/combo`);
-            }).catch((error) => {
-                if(error.response){
-                    var errors = error.response.data.error
-                    var data = this.errors;
-                    if (errors) {
-                        if(errors.name && errors.name[0] && !errors.price && !errors.image && !errors.products){
-                            this.$emit("showToast",errors.name[0],'error'); return false;}
-                        if(!errors.name && errors.price && errors.price[0] && !errors.image && !errors.products){
-                            this.$emit("showToast",errors.price[0],'error'); return false;}
-                        if(!errors.name && !errors.price && errors.image && errors.image[0] && !errors.products){
-                            this.$emit("showToast",errors.image[0],'error'); return false;}
-                        if(!errors.name && !errors.price && !errors.image && errors.products && errors.products[0]){
-                            this.$emit("showToast",errors.products[0],'error'); return false; }
+            // var formData = new FormData();
+            // formData.append('name', this.combo.name);
+            // formData.append('price', this.combo.price);
+            // formData.append('foodType', this.combo.foodType);
+            // formData.append('image', this.combo.image);
+            // formData.append('products', this.selproduct);
+            // formData.append('status', this.combo.status);
 
-                        if(errors.name || errors.price || errors.image || errors.products) this.$emit("showToast","Please fill out form details.",'error');
+            // axios
+            // .post("/api/addcombo",formData,config)
+            // .then((res) => {
+            //     this.clearData();
+            //     this.$emit("showToast",res.data.success,"success");
+            //     this.$router.push(`/combo`);
+            // }).catch((error) => {
+            //     if(error.response){
+            //         var errors = error.response.data.error
+            //         var data = this.errors;
+            //         if (errors) {
+            //             if(errors.name && errors.name[0] && !errors.price && !errors.image && !errors.products){
+            //                 this.$emit("showToast",errors.name[0],'error'); return false;}
+            //             if(!errors.name && errors.price && errors.price[0] && !errors.image && !errors.products){
+            //                 this.$emit("showToast",errors.price[0],'error'); return false;}
+            //             if(!errors.name && !errors.price && errors.image && errors.image[0] && !errors.products){
+            //                 this.$emit("showToast",errors.image[0],'error'); return false;}
+            //             if(!errors.name && !errors.price && !errors.image && errors.products && errors.products[0]){
+            //                 this.$emit("showToast",errors.products[0],'error'); return false; }
 
-                    }
-                }
-            })
+            //             if(errors.name || errors.price || errors.image || errors.products) this.$emit("showToast","Please fill out form details.",'error');
+
+            //         }
+            //     }
+            // })
         },
         clearData(){
             this.combo.name = '';

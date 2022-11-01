@@ -214,7 +214,7 @@
             <span class="d-flex align-items-center">
               <img
                 class="rounded-circle header-profile-user"
-                :src="photo"
+                :src="'/storage/user/super_admin.jpg'"
                 alt="Header Avatar"
               />
               <span class="text-start ms-xl-2">
@@ -238,7 +238,7 @@
           <div class="dropdown-menu dropdown-menu-end" id="profile-drop-down">
             <!-- item-->
             <h6 class="dropdown-header">Welcome {{ name }}!</h6>
-            <a class="dropdown-item" href="javascript:;"
+            <!-- <a class="dropdown-item" href="javascript:;"
               ><i
                 class="
                   mdi mdi-account-circle
@@ -249,7 +249,7 @@
                 "
               ></i>
               <span class="align-middle">Profile</span></a
-            >
+            > -->
             <a class="dropdown-item" href="/logout"
               ><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
               <span class="align-middle" data-key="t-logout">Logout</span></a
@@ -403,29 +403,29 @@ export default {
     image_url: String
   },
   created() {
-      axios.get('/api/checkheaderpermission')
-      .then(res => {
-      this.permissions = res.data.permissions;
-      }).catch(err => {
-      })
+      // axios.get('/api/checkheaderpermission')
+      // .then(res => {
+      // this.permissions = res.data.permissions;
+      // }).catch(err => {
+      // })
 
-      axios.get('/api/getuserdata')
-      .then(res => {
-      this.name = res.data.name;
+      // axios.get('/api/getuserdata')
+      // .then(res => {
+      // this.name = res.data.name;
 
-      if(res.data.type == 'super_admin')
-      this.type = 'Super Admin';
-      else if(res.data.type == 'sub_admin')
-      this.type = 'Sub Admin';
-      else if(res.data.type == 'kitchen_manager')
-      this.type = 'Kitchen Manager';
-      else if(res.data.type == 'waiter')
-      this.type = 'Waiter';
+      // if(res.data.type == 'super_admin')
+      // this.type = 'Super Admin';
+      // else if(res.data.type == 'sub_admin')
+      // this.type = 'Sub Admin';
+      // else if(res.data.type == 'kitchen_manager')
+      // this.type = 'Kitchen Manager';
+      // else if(res.data.type == 'waiter')
+      // this.type = 'Waiter';
 
-      this.photo = `/storage/` + res.data.photo;
+      // this.photo = `/storage/` + res.data.photo;
 
-      }).catch(err => {
-      });
+      // }).catch(err => {
+      // });
   },
   methods:{
     addMenuChange(){

@@ -20,10 +20,10 @@
                         <div class="card equal-height-ingredient" :class="product.status == 1 ? '' : 'card--deactive' ">
                             <div class="card-bottom px-1 pb-2 text-center border-0" :class="product.status == 1 ? '' : 'mt-auto' ">
                                 <ul class="list-inline mb-0 mt-2 d-flex justify-content-between align-items-center">
-                                    <li class="list-inline-item me-0 list--delete" v-if="allpermissions.ProductDelete">
+                                    <li class="list-inline-item me-0 list--delete" >
                                         <a href="javascript:;" class="align-middle" data-bs-toggle="modal" data-bs-target="#removedataalert"  @click="proId = product.id"><i class="fa-solid fa-trash-can text-danger"></i></a>
                                     </li>
-                                    <li class="list-inline-item list--edit" v-if="allpermissions.ProductEdit">
+                                    <li class="list-inline-item list--edit" >
                                         <a href="javascript:;" class="align-middle" @click="editProduct(product.slug)" ><i class="fa-solid fa-pen-to-square color-gray"></i></a>
                                     </li>
                                 </ul>
@@ -54,7 +54,7 @@
                 <div class="footer-link d-flex align-items-center justify-content-between">
                     <a href="javascript:;" @click="$router.go(-1)" class="text-success fs-16"><i class="ri-arrow-go-back-line "></i> Back</a>
                     <div class="submit-btn">
-                        <button class="btn btn-success btn-custom fs-16"  @click="AddProduct()" v-if="allpermissions.ProductAdd"><i class="ri-add-fill me-1 align-bottom" ></i> Add Product</button>
+                        <button class="btn btn-success btn-custom fs-16"  @click="AddProduct()" ><i class="ri-add-fill me-1 align-bottom" ></i> Add Product</button>
                     </div>
                 </div>
             </div>
@@ -168,16 +168,19 @@ export default {
             this.$router.push(`/add/product`);
       },
         removeData(){
-            var formData = new FormData();
-            formData.append('id', this.proId);
-            axios
-            .post("/api/removeProduct",formData)
-            .then((res) => {
-                this.$emit("showToast",res.data.success,'success');
-                this.getproductlist();
 
-            }).catch((error) => {
-            })
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // var formData = new FormData();
+            // formData.append('id', this.proId);
+            // axios
+            // .post("/api/removeProduct",formData)
+            // .then((res) => {
+            //     this.$emit("showToast",res.data.success,'success');
+            //     this.getproductlist();
+
+            // }).catch((error) => {
+            // })
         },
     }
 };

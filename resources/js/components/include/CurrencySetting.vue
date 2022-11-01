@@ -71,37 +71,40 @@ export default {
                 })
         },
          saveSetting(){
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
+
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data' }
+            // }
             
-            if (!this.currency_name && this.currency_code && this.currency_symbol){ this.$emit("showToast","Please fill the currency name field.",'error'); return false; }
+            // if (!this.currency_name && this.currency_code && this.currency_symbol){ this.$emit("showToast","Please fill the currency name field.",'error'); return false; }
 
-            if (this.currency_code && !this.currency_code && this.currency_symbol){ this.$emit("showToast","Please fill the currency code field.",'error'); return false; }
+            // if (this.currency_code && !this.currency_code && this.currency_symbol){ this.$emit("showToast","Please fill the currency code field.",'error'); return false; }
 
-            if (this.currency_symbol && this.currency_code && !this.currency_symbol){ this.$emit("showToast","Please fill the currency symbol field.",'error'); return false; }
+            // if (this.currency_symbol && this.currency_code && !this.currency_symbol){ this.$emit("showToast","Please fill the currency symbol field.",'error'); return false; }
 
-            if(!this.currency_name || !this.currency_code || !this.currency_symbol){ this.$emit('showToast',"Please fill out form details.",'error'); return false; }
+            // if(!this.currency_name || !this.currency_code || !this.currency_symbol){ this.$emit('showToast',"Please fill out form details.",'error'); return false; }
 
 
-            var button = event.target;
-            button.disabled = true;
-            button.textContent = 'saving...';
+            // var button = event.target;
+            // button.disabled = true;
+            // button.textContent = 'saving...';
 
-            var formData = new FormData();
-            formData.append('currency_name', this.currency_name);
-            formData.append('currency_code', this.currency_code);
-            formData.append('currency_symbol', this.currency_symbol);
+            // var formData = new FormData();
+            // formData.append('currency_name', this.currency_name);
+            // formData.append('currency_code', this.currency_code);
+            // formData.append('currency_symbol', this.currency_symbol);
 
-            axios
-            .post("/api/edit-setting",formData,config)
-            .then((res) => {
-                this.$emit("showToast",res.data.success,'success');
-                this.getSettingData();
-                button.disabled = false;
-                button.textContent = 'save';
-            }).catch((error) => {
-            })
+            // axios
+            // .post("/api/edit-setting",formData,config)
+            // .then((res) => {
+            //     this.$emit("showToast",res.data.success,'success');
+            //     this.getSettingData();
+            //     button.disabled = false;
+            //     button.textContent = 'save';
+            // }).catch((error) => {
+            // })
         }
     },
     created() {

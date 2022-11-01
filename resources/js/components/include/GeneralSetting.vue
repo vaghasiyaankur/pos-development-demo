@@ -146,46 +146,48 @@ export default {
         },
         saveSetting(){
 
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // const config = {
+            //     headers: { 'content-type': 'multipart/form-data' }
+            // }
 
-            var check_error = 0;
+            // var check_error = 0;
 
-            if (this.restaurantName == '' && this.address != '' && this.phoneNumber != '' && this.time_zone != ''){ this.$emit('showToast',"Please fill the restaurant name field.","error"); return false; }
+            // if (this.restaurantName == '' && this.address != '' && this.phoneNumber != '' && this.time_zone != ''){ this.$emit('showToast',"Please fill the restaurant name field.","error"); return false; }
 
-            if (this.restaurantName != '' && this.address == '' && this.phoneNumber != '' && this.time_zone != ''){ this.$emit('showToast',"Please fill the address field.","error"); return false; }
+            // if (this.restaurantName != '' && this.address == '' && this.phoneNumber != '' && this.time_zone != ''){ this.$emit('showToast',"Please fill the address field.","error"); return false; }
 
-            if (this.restaurantName != '' && this.address != '' && this.phoneNumber == '' && this.time_zone != ''){ this.$emit('showToast',"Please fill the phone number field.","error"); return false; }
+            // if (this.restaurantName != '' && this.address != '' && this.phoneNumber == '' && this.time_zone != ''){ this.$emit('showToast',"Please fill the phone number field.","error"); return false; }
 
-            if (this.restaurantName != '' && this.address != '' && this.phoneNumber != '' && this.time_zone == ''){ this.$emit('showToast',"Please select any one time zone.","error"); return false; }
+            // if (this.restaurantName != '' && this.address != '' && this.phoneNumber != '' && this.time_zone == ''){ this.$emit('showToast',"Please select any one time zone.","error"); return false; }
 
-            if(this.restaurantName == '' || this.address == '' || this.phoneNumber == '' || this.time_zone == '') { this.$emit('showToast',"Please fill out form details.",'error'); return false; }
+            // if(this.restaurantName == '' || this.address == '' || this.phoneNumber == '' || this.time_zone == '') { this.$emit('showToast',"Please fill out form details.",'error'); return false; }
 
 
-            var button = event.target;
-            button.disabled = true;
-            button.textContent = 'saving...';
+            // var button = event.target;
+            // button.disabled = true;
+            // button.textContent = 'saving...';
 
-            var formData = new FormData();
-            formData.append('restaurent_name', this.restaurantName);
-            formData.append('address', this.address);
-            formData.append('phone', this.phoneNumber);
-            formData.append('print_bill_header', this.print_bill_header);
-            formData.append('print_bill_footer', this.print_bill_footer);
-            formData.append('logo', this.logo_image_name);
-            formData.append('fav_icon', this.fav_icon_image_name);
-            formData.append('time_zone', this.time_zone);
+            // var formData = new FormData();
+            // formData.append('restaurent_name', this.restaurantName);
+            // formData.append('address', this.address);
+            // formData.append('phone', this.phoneNumber);
+            // formData.append('print_bill_header', this.print_bill_header);
+            // formData.append('print_bill_footer', this.print_bill_footer);
+            // formData.append('logo', this.logo_image_name);
+            // formData.append('fav_icon', this.fav_icon_image_name);
+            // formData.append('time_zone', this.time_zone);
 
-            axios
-            .post("/api/edit-setting",formData,config)
-            .then((res) => {
-                this.$emit('showToast',res.data.success,"success");
-                this.getSettingData();
-                button.disabled = false;
-                button.textContent = 'save';
-            }).catch((error) => {
-            })
+            // axios
+            // .post("/api/edit-setting",formData,config)
+            // .then((res) => {
+            //     this.$emit('showToast',res.data.success,"success");
+            //     this.getSettingData();
+            //     button.disabled = false;
+            //     button.textContent = 'save';
+            // }).catch((error) => {
+            // })
         }
     },
     created() {

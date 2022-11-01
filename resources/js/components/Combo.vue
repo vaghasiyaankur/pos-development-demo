@@ -24,11 +24,11 @@
                                 </div>
                                 <div class="card-bottom px-1 text-center border-0">
                                     <ul class="list-inline mb-0 d-flex justify-content-between align-items-center">
-                                        <li class="list-inline-item me-0 list--delete" v-if="allpermissions.ComboDelete">
+                                        <li class="list-inline-item me-0 list--delete" >
                                             <a href="javascript:;" class="align-middle" data-bs-toggle="modal" data-bs-target="#removedataalert"  @click="comboId = combo.id"><i class="fa-solid fa-trash-can text-danger"></i></a>
                                         </li>
                                         <li class="fs-11 px-1 color--gray-2">{{currencyCode}} {{ combo.price.toFixed(2) }}</li>
-                                        <li class="list-inline-item list--edit" v-if="allpermissions.ComboEdit">
+                                        <li class="list-inline-item list--edit" >
                                             <a href="javascript:;" class="align-middle" @click="editCombo(combo.slug)"><i class="fa-solid fa-pen-to-square color-gray"></i></a>
                                         </li>
                                     </ul>
@@ -52,7 +52,7 @@
                 <div class="footer-link d-flex align-items-center justify-content-between">
                     <a href="javascript:;" @click="$router.go(-1)" class="text-success fs-16"><i class="ri-arrow-go-back-line "></i> Back</a>
                     <div class="submit-btn">
-                        <button class="btn btn-success btn-custom fs-16"  @click="AddCombo()" v-if="allpermissions.ComboAdd"><i class="ri-add-fill me-1 align-bottom" ></i> Add Combo</button>
+                        <button class="btn btn-success btn-custom fs-16"  @click="AddCombo()" ><i class="ri-add-fill me-1 align-bottom" ></i> Add Combo</button>
                     </div>
                 </div>
             </div>
@@ -125,16 +125,19 @@ export default {
             this.$router.push(`/combo/add`);
         },
         removeData(){
-            var formData = new FormData();
-            formData.append('id', this.comboId);
-            axios
-            .post("/api/removeCombo",formData)
-            .then((res) => {
-                this.$emit("showToast",res.data.success,'success');
-                this.getcombolist();
 
-            }).catch((error) => {
-            })
+            this.$emit('showToast',"You Can not change this on demo account.",'error'); 
+            return false;
+            // var formData = new FormData();
+            // formData.append('id', this.comboId);
+            // axios
+            // .post("/api/removeCombo",formData)
+            // .then((res) => {
+            //     this.$emit("showToast",res.data.success,'success');
+            //     this.getcombolist();
+
+            // }).catch((error) => {
+            // })
         },
     }
 };

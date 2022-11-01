@@ -36,7 +36,6 @@
                            </div>
                            <div class="lockscreen-right-heading mt-3">
                                 <h1 class="text-white">Enter passcode</h1>
-                                <p class="text-white">hint : 0000  </p>
                            </div>
                            <div id="fields">
                                 <div class="grid">
@@ -45,6 +44,9 @@
                                     <div class="grid__col grid__col--1-of-4 numberfield" id="position-3"><span></span></div>
                                     <div class="grid__col grid__col--1-of-4 numberfield" id="position-4"><span></span></div>
                                 </div>
+                            </div>
+                            <div>
+                                <span class="text-white">Hint : 0000</span>
                             </div>
                                 <div id="numbers" class="pt-3">
                                     <div class="grid">
@@ -97,7 +99,7 @@ import { useToast } from "vue-toastification";
             }
         },
         created() {
-            // this.getusepasscode();
+            this.getusepasscode();
         },
         beforeCreate() {
             // this.$emit('addLoader');
@@ -158,14 +160,14 @@ import { useToast } from "vue-toastification";
 
             /* User Passcode catch from database */
             getusepasscode(){
-                // axios.get('/api/getuserpasscode')
-                // .then(res => {
-                //     this.passcode = res.data.passcode;
-                //     this.indexper = res.data.indexpermission;
-                // })
-                // .catch(err => {
-                //     console.log(err);
-                // });
+                axios.get('/api/getuserpasscode')
+                .then(res => {
+                    this.passcode = res.data.passcode;
+                    this.indexper = res.data.indexpermission;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
             },
 
             /* verify user passcode */
@@ -198,10 +200,10 @@ import { useToast } from "vue-toastification";
 
             /* Pin number set */
             addLockPin(number){
-
+                
                 var element = event.target;
                 element.classList.add("active");
-
+                
                 setTimeout(function() {
                     element.classList.remove("active")
                 }, 500);
@@ -249,7 +251,7 @@ import { useToast } from "vue-toastification";
 </script>
 
 <style scoped>
-
+    
 .error{
     color : red;
 }
@@ -317,7 +319,7 @@ import { useToast } from "vue-toastification";
         -webkit-animation: miss .8s ease-out 1;
         animation: miss .8s ease-out 1;
         animation-iteration-count: 2;
-      }
+      }              
       @keyframes miss {
         0% {
           -webkit-transform: translate(0, 0);
@@ -366,7 +368,7 @@ import { useToast } from "vue-toastification";
         overflow: hidden;
         z-index: 1100;
     }
-    .lock-screen-main{
+    .lock-screen-main{    
         position: absolute;
         top: 50%;
         left: 50%;

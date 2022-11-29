@@ -140,11 +140,11 @@ export default {
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         }
-        axios.post('/api/lockenabledisable',{lock : 1},config)
-        .then(res => {
-        }).catch(err => {
-        })
-    }
+          axios.post('/api/lockenabledisable',{lock : 1},config)
+          .then(res => {
+          }).catch(err => {
+          })
+        }
     },
     components: {
         Header

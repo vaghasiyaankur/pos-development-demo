@@ -11,16 +11,12 @@
                         <div class="lock-screen-left">
                             <div class="logo--title d-flex align-items-center justify-content-center">
                                 <div class="lock-screen-logo pe-2">
-                                    <img src="assets/images/lockscreen-logo.png" class="img-fluid" alt="screen">
-                                </div>
-                                <div class="lock-screen-title">
-                                    <h1 class="text-white mb-0 font--50">Foodknot</h1>
-                                    <p class="mb-0 text-white text-start fs-20">Restaurant</p>
+                                    <img :src="logo_image" class="img-fluid" alt="screen">
                                 </div>
                             </div>
                             <div class="lock-screen-time text-center mt-5 pt-4">
-                                <h1 class="mb-0 text-white font--50">8:53 AM</h1>
-                                <p class="mb-0 text-white fs-2">Wednesday June 1, 2022</p>
+                                <h1 class="mb-0 text-white font--50">{{ time }}</h1>
+                                <p class="mb-0 text-white fs-2">{{ date }}</p>
                             </div>
                         </div>
                     </div>
@@ -84,6 +80,7 @@ import { useToast } from "vue-toastification";
             return{
                 email: '',
                 password: '',
+                logo_image: '',
                 success: '',
                 errors: {
                     email : '',
@@ -96,10 +93,13 @@ import { useToast } from "vue-toastification";
                 pinposition : 0,
                 pin: '',
                 indexper : 0,
+                date: '',
+                time: '',
             }
         },
         created() {
             this.getusepasscode();
+            this.liveDateTime();
         },
         beforeCreate() {
             // this.$emit('addLoader');
@@ -164,6 +164,7 @@ import { useToast } from "vue-toastification";
                 .then(res => {
                     this.passcode = res.data.passcode;
                     this.indexper = res.data.indexpermission;
+                    this.logo_image = res.data.logo_image;
                 })
                 .catch(err => {
                     console.log(err);
@@ -243,7 +244,28 @@ import { useToast } from "vue-toastification";
                 .then(res => {
                 }).catch(err => {
                 })
-            }
+            },
+            liveDateTime() {
+            axios.get('/api/liveDateTime')
+            .then(res => {
+                this.date = res.data.date;
+                this.time = res.data.time;
+                this.callInterval();
+            }).catch(err => {
+
+            });
+            },
+            async callInterval(){
+                setInterval(this.intervalFun, 20000)
+            },intervalFun() {
+                axios.get('/api/liveDateTime')
+                .then(res => {
+                    this.date = res.data.date;
+                    this.time = res.data.time;
+                }).catch(err => {
+
+                });
+            },
         }
     }
 

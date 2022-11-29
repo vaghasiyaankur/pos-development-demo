@@ -148,38 +148,12 @@
                   </ul>
                 </div>
               </li>
-              <!-- <li class="menu-title" v-if="permissions.Orders">
-                <a class="nav-link menu-link collapse--class" href="#">
-
-                  <span data-key="t-pages">Orders</span>
-                </a>
-              </li> -->
-              <!-- <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type ==  'Sub Admin' }" >
-                <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Category' || this.$route.name == 'subCategory' ? 'text-success' : ''" to="/category"> <span data-key="t-category-management">Category</span></router-link>
-              </li>
-              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" >
-                <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'IngredientCategory' || this.$route.name == 'Ingredient' ? 'text-success' : ''" to="/ingredient-category"> <span data-key="t-dashboards">Ingredient</span></router-link>
-              </li>
-              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" >
-                <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Combo' || this.$route.name == 'AddCombo' || this.$route.name == 'EditCombo' ? 'text-success' : ''" to="/combo"> <span data-key="t-dashboards">Combo</span></router-link>
-              </li>
-              <li class="nav-item" :class="{'d-none' : type == 'Super Admin' || type == 'Sub Admin' }" >
-                <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Product' || this.$route.name == 'Products' || this.$route.name == 'ProductAdd' || this.$route.name == 'ProductEdit' || this.$route.name == 'EditProduct' ? 'text-success' : ''"  to="/products"> <span data-key="t-dashboards">Product</span></router-link>
-              </li> -->
 
 
               <li class="nav-item" >
               <router-link class="nav-link menu-link small--size--navlink" href="javascript:;" :class="this.$route.name == 'Table' ? 'text-success' : ''"  to="/table"> <span data-key="t-pages">Floorplan</span></router-link>
               </li>
 
-              <!-- <li class="nav-item" v-if="permissions.UserManagement">
-              <router-link class="nav-link menu-link small--size--navlink" href="javascript:;" to="/user-management">  <span data-key="t-apps">User Management</span></router-link>
-              </li> -->
-              <!-- <li class="nav-item" >
-                <a class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'Reports' ? 'text-success' : ''"  href="javascript:;">
-                  <span data-key="t-landing">Reports</span>
-                </a>
-              </li> -->
               <li class="nav-item" >
                 <router-link class="nav-link menu-link small--size--navlink" :class="this.$route.name == 'CompleteOrder' ? 'text-success' : ''" to="/complete-order"> <span data-key="t-dashboards">Complete order</span></router-link>
               </li>
@@ -458,10 +432,10 @@ export default {
 
 /***********CSS FOR HEADER ************/
 .logo_image{
-    height: 100%;
-    max-height: 50px;
-    width: 100%;
-    max-width: 50px;
+  height: 100%;
+  max-height: 52px;
+  width: 100%;
+  max-width: 120px;
 }
 [data-layout=horizontal] .navbar-menu {
     background: transparent;

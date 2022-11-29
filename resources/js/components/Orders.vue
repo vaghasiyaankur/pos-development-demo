@@ -17,8 +17,8 @@
                             <div class="card single--card bg-blue" style="top:-18px;" :style="'background : rgb(' + order.color + ')'" v-if="order.order_count > 3"></div>
                                 <div class="card single--card bg-blue position-absolute w-100" style="top:-12px;" :style="'background : rgb(' + order.color + ')'" v-if="order.order_count > 2"></div>
                                 <div class="card single--card bg-blue position-absolute w-100" style="top:-6px;" :style="'background : rgb(' + order.color + ')'" v-if="order.order_count > 1"></div>
-                            <div class="card single--card w-100">
-                                <div class="card-header bg-blue border-bottom-0 fs-10 py-1 px-2" :style="'background : rgb(' + order.color + ')'" data-bs-toggle="modal" data-bs-target="#fadeInUpModal" @click="addLoader = true; getordersforpopup(order.table)">
+                            <div class="card single--card position-absolute w-100" style="top:0px;">
+                                    <div class="card-header bg-blue border-bottom-0 fs-10 py-1 px-2" :style="'background : rgb(' + order.color + ')'" data-bs-toggle="modal" data-bs-target="#fadeInUpModal" @click="addLoader = true; getordersforpopup(order.table)">
                                     <div class="header-top">
                                         <div class="header-top-right d-flex justify-content-between">
                                             <p class="mb-0">
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="card-footer border-top-0 pt-2 pb-2 px-2">
                                     <div class="d-flex justify-content-between" v-if="!removeOrderLoader.includes(key)">
-                                        <button class="btn btn-green fs-12 fw-medium" :disabled="order.ordered == 1" @click="orderSave(key,order.tableId)" >{{ order.ordered == 1 ? 'served' : 'serve' }}</button>
+                                        <button class="btn btn-green fs-12 fw-medium" :disabled="order.ordered == 1" @click="orderSave(key,order.tableId)" >{{ order.ordered == 1 ? 'Served' : 'Serve' }}</button>
                                         <button class="btn btn-danger fs-12 fw-medium" @click="orderPay(key,order.tableId)">Pay</button>
                                         <button class="btn btn-black" @click="printOrder(order.tableId)" >
                                             <i class="fa-solid fa-print"></i>

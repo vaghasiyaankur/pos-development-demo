@@ -18,6 +18,7 @@ class SettingSeeder extends Seeder
             'restaurent_name' => 'Pos Development',
             'logo' => 'setting/logo.png',
             'fav_icon' => 'setting/fav_icon.png',
+            'light_icon' => 'setting/light_logo.png',
             'address' => '408 23rd St, Canyo, Texas, United States-79015',
             'phone' => '(806) 655-4736',
             'time_zone' => 'Asia/Kolkata',

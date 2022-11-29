@@ -149,7 +149,7 @@
           <div class="d-grid mt-2">
             <a href="javascript:;" class="position-relative">
               <button type="button" class="btn btn-success w-100 fs-16" style="line-height:16px;" data-bs-toggle="modal" data-bs-target="#orderPlaceModal" @click="placeOrder" :disabled="cart.data.length < 1">
-                PlaceOrder
+                Order
               </button>
             <div class="spinner-border text-light position-absolute addtocart-btn-spinner d-none" id="loader_CartOrder" role="status">
                 <span class="sr-only">Loading...</span>

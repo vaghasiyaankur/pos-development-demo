@@ -167,6 +167,7 @@ Route::get('getuserdata', [UserManagementController::class , 'getUserData']);
 */
 Route::get('getuserpasscode', [UserManagementController::class , 'userPasscode']);
 Route::post('lockenabledisable', [UserManagementController::class , 'lockEnableDisable']);
+Route::get('liveDateTime', [UserManagementController::class , 'liveDateTime']);
 
 /*
 |--------------------------------------------------------------------------

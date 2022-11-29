@@ -44,6 +44,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-3 margin--bottom--10">
+                        <div class="col-6 pe-2">
+                            <label for="p-name" class="form-label fs-14 padding-start-10 color-gray mb-1">Light Logo</label>
+                            <div class="icon--box mb-2">
+                                <div class="icon--box--inner">
+                                    <span class="logo-lg"><img :src="light_logo_image_url" class="img-fluid" alt="settings"></span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input class="custom-file-input" id="light-logo-image" type="file" @change="onLightLogoImageChange">
+                                    <label class="custom-file-label" for="light-logo-image"><span>{{light_logo_image_name.name ? light_logo_image_name.name : light_logo_image_name }}</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row margin--bottom--10 mt-3">
                         <div class="col-12">
                             <div class="product-description-text">
@@ -103,6 +119,8 @@ export default {
             print_bill_footer : '',
             logo_image_name: 'Choose Flie',
             logo_image_url : '',
+            light_logo_image_name: 'Choose Flie',
+            light_logo_image_url : '',
             fav_icon_image_name: 'Choose Flie',
             fav_icon_image_url: '',
             toast : useToast(),
@@ -121,6 +139,10 @@ export default {
             this.logo_image_name = e.target.files[0];
             this.logo_image_url = URL.createObjectURL(this.logo_image_name);
         },
+        onLightLogoImageChange(e){
+            this.light_logo_image_name = e.target.files[0];
+            this.light_logo_image_url = URL.createObjectURL(this.light_logo_image_name);
+        },
         onFavIconImageChange(e){
             this.fav_icon_image_name = e.target.files[0];
             this.fav_icon_image_url = URL.createObjectURL(this.fav_icon_image_name);
@@ -135,10 +157,12 @@ export default {
                     this.print_bill_header = data.print_bill_header
                     this.print_bill_footer = data.print_bill_footer
                     this.logo_image_url = `/storage/`+data.logo
+                    this.light_logo_image_url = `/storage/`+data.light_logo
                     this.fav_icon_image_url = `/storage/`+data.fav_icon
                     this.time_zone = data.time_zone
                     this.timeZone = res.data.timeZone;
                     $('.logo img').attr('src',this.logo_image_url);
+                    $('.light_logo img').attr('src',this.light_logo_image_url);
                     $('link[rel="shortcut icon"]').attr('href',this.fav_icon_image_url);
                     this.$emit('removeLoader')
                 }).catch(err => {
@@ -176,6 +200,7 @@ export default {
             // formData.append('print_bill_header', this.print_bill_header);
             // formData.append('print_bill_footer', this.print_bill_footer);
             // formData.append('logo', this.logo_image_name);
+            // formData.append('light_logo', this.light_logo_image_name);
             // formData.append('fav_icon', this.fav_icon_image_name);
             // formData.append('time_zone', this.time_zone);
 
@@ -217,7 +242,7 @@ export default {
         border-radius: 10px;
     }
     .general-setting .general-setting-form .icon--box .icon--box--inner img{
-        max-height: 45px;
+        max-height: 80px;
     }
     .general-setting .general-setting-inner .general-setting-form .form-control{
         max-height: 36px;

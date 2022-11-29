@@ -131,7 +131,7 @@
                             <p class="mb-4 fs-19">Select the staff member you want to assign to this table</p>
                             <div class="row align-items-center mb-4">
                                 <label class="col-4 form-label fs-16 padding-start-10 color-gray text-start mb-0">Table:</label>
-                                <Select2 v-model="orderTable" :options="avaliableTable" :settings="{ settingOption: value, settingOption: value }" @focusin="addstyle()" @select="checkcustomer();" class="col-8"/>
+                                <Select2 :options="avaliableTable" :settings="{ settingOption: value, settingOption: value }" @focusin="addstyle()" @select="checkcustomer($event);" class="col-8"/>
                             </div>
                             <div class="row align-items-center mb-4">
                                 <label class="col-4 form-label fs-16 padding-start-10 color-gray text-start mb-0">Contact number :</label>
@@ -314,7 +314,16 @@ export default {
         getavaliableTable(){
              axios.get('/api/getavaliableTable')
                 .then(res => {
-                    this.avaliableTable = res.data.table;
+                    var arr = [];
+                    res.data.table.forEach(function (element) {
+                        console.log(element);
+                        var obj = {};
+                        obj['id'] = element;
+                        obj['text'] = 'Table - ' + element;
+                        arr.push(obj);
+                     });
+                     this.avaliableTable = arr;
+                    // this.avaliableTable = res.data.table;
                 }).catch(err => {})
         },
         getsetting() {
@@ -651,7 +660,8 @@ export default {
                 el.classList.add("active");
             })
         },
-        checkcustomer(){
+        checkcustomer(select){
+            this.orderTable = select.id;
             const config = {
                 headers: { 'content-type': 'multipart/form-data' }
             }

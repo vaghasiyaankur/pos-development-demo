@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Setting;
 use App\Models\Permission;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Redirect;
 use Auth;   
+use Carbon\Carbon;
 
 class UserManagementController extends Controller
 {
@@ -189,7 +191,7 @@ class UserManagementController extends Controller
     }
 
     /**
-     * Send Current Login User passcode for scrren lock page 
+     * Send Current Login User passcode and logo  for scrren lock page 
      *
      * @return Json
      * 
@@ -197,7 +199,11 @@ class UserManagementController extends Controller
     public function userPasscode()
     {
         $indexper = Permission::where('function', 'Index')->count();
-        return response()->json(['passcode' => 0000, 'indexpermission' => $indexper]);
+        $logo_image = Setting::where('type', 'light_logo')->first();
+        $logo_image_path = 'storage/'.$logo_image->value;
+
+
+        return response()->json(['passcode' => 0000, 'indexpermission' => $indexper, 'logo_image' => $logo_image_path]);
     }
 
     /**
@@ -210,4 +216,17 @@ class UserManagementController extends Controller
         // $update = User::where('id', Auth::user()->id)->update(['lock_enable' => $request->lock]);
         return 'success';
     }
+
+    /**
+    * To Get Live Date And Time For LockScreen Page
+    * @param Request $request
+    */
+    public function liveDateTime(Request $request)
+    {
+        $time = Carbon::now()->format('h:i A');
+        $date = Carbon::now()->format('l F j,Y');
+        return response()->json(['time' => $time, 'date' => $date]);
+    }
+
+    
 }

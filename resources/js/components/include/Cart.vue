@@ -79,7 +79,7 @@
                       <div class="product-img">
                       <img
                       :src="'/storage/'+ data.product.image"
-                      class="flex-shrink-0 me-3 avatar-sm rounded-circle" alt="cart"
+                      class="flex-shrink-0 me-3 avatar-sm rounded-circle" alt="cartImage"
                     />
                       </div>
                     </div>

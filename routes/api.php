@@ -238,7 +238,9 @@ Route::post('edit-setting', [SettingController::class , 'edit_setting']);
 |
 */
 Route::get('/getcompleteorderddata', [CompletedOrderController::class , 'getcompleteorderddata']);
-Route::get('/getOrderProduct/{orderId}', [CompletedOrderController::class , 'getOrderProduct']);
+// Route::get('/getOrderProduct/{orderId}', [CompletedOrderController::class , 'getOrderProduct']);
+Route::get('/getOrderProduct/{tableId}/{orderId}', [CompletedOrderController::class , 'getOrderProduct']);
+
 Route::get('/printCompletedorder/{id}', [CompletedOrderController::class , 'printCompletedorder']);
 Route::post('/emailInvoice', [CompletedOrderController::class , 'emailInvoice']);
 Route::get('/emailInvoice/{id}', [CompletedOrderController::class , 'emailInvoice']);

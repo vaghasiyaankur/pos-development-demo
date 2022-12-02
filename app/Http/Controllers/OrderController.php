@@ -28,6 +28,44 @@ class OrderController extends Controller
         $orderData = session()->get('demoOrderData');
         $orders = [];
 
+        $ord = Order::where('payed',0)->get()->whereNotNull('tableOrder.table_id')->groupBy('tableOrder.table_id');
+        foreach($ord as $order){
+            $firstOrder = $order[0];
+            $data = [];
+            $orderProData = $firstOrder->orderProduct;
+                foreach($orderProData as $orderPro){
+                    if($orderPro->product){
+                        $data[$orderPro->product->name][$orderPro->product->id]['quantity'] = $orderPro->quantity;
+                        $data[$orderPro->product->name][$orderPro->product->id]['name'] = $orderPro->product->name;
+                        $data[$orderPro->product->name][$orderPro->product->id]['price'] = $orderPro->amount;
+                    }
+                    if($orderPro->combo){
+                        $data[$orderPro->combo->name][$orderPro->combo->id]['quantity'] = $orderPro->quantity;
+                        $data[$orderPro->combo->name][$orderPro->combo->id]['name'] = $orderPro->combo->name;
+                        $data[$orderPro->combo->name][$orderPro->combo->id]['price'] = $orderPro->amount;
+                    }
+                    if($orderPro->ingredient){
+                        $data[$orderPro->ingredient->name][$orderPro->ingredient->id]['quantity'] = $orderPro->quantity;
+                        $data[$orderPro->ingredient->name][$orderPro->ingredient->id]['name'] = $orderPro->ingredient->name;
+                        $data[$orderPro->ingredient->name][$orderPro->ingredient->id]['price'] = $orderPro->amount;
+                    }
+
+                }
+
+                $diff = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $firstOrder->created_at)->diffInMinutes(\Carbon\Carbon::now());
+
+                $orders[$firstOrder->id]['pay_amount'] = $firstOrder->pay_amount;
+                $orders[$firstOrder->id]['total_amount'] = $firstOrder->total_amount;
+                $orders[$firstOrder->id]['table'] = 0;
+                $orders[$firstOrder->id]['ordered'] = $firstOrder->ordered;
+                $orders[$firstOrder->id]['tableId'] = 0;
+                $orders[$firstOrder->id]['color'] = '191, 220, 227';
+                $orders[$firstOrder->id]['customer_name'] = 'test';
+                $orders[$firstOrder->id]['order_count'] = 1;
+                $orders[$firstOrder->id]['data'] = $data;
+                $orders[$firstOrder->id]['diff'] = $diff;
+            }
+
         if($orderData){
             foreach($orderData as $orderPro){
                 foreach($orderPro as $key=>$order){

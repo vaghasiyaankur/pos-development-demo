@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             TableSeeder::class,
             SettingSeeder::class,
             TaxSeeder::class,
+            OrderSeeder::class
         ]);
     }
 }

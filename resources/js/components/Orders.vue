@@ -18,7 +18,7 @@
                                 <div class="card single--card bg-blue position-absolute w-100" style="top:-12px;" :style="'background : rgb(' + order.color + ')'" v-if="order.order_count > 2"></div>
                                 <div class="card single--card bg-blue position-absolute w-100" style="top:-6px;" :style="'background : rgb(' + order.color + ')'" v-if="order.order_count > 1"></div>
                             <div class="card single--card position-absolute w-100" style="top:0px;">
-                                    <div class="card-header bg-blue border-bottom-0 fs-10 py-1 px-2" :style="'background : rgb(' + order.color + ')'" data-bs-toggle="modal" data-bs-target="#fadeInUpModal" @click="addLoader = true; getordersforpopup(order.table)">
+                                    <div class="card-header bg-blue border-bottom-0 fs-10 py-1 px-2" :style="'background : rgb(' + order.color + ')'" :data-bs-toggle="order.table == 0 ? '' : 'modal'" :data-bs-target="order.id == 0 ? '' : '#fadeInUpModal'" @click="addLoader = true; getordersforpopup(order.table)">
                                     <div class="header-top">
                                         <div class="header-top-right d-flex justify-content-between">
                                             <p class="mb-0">
@@ -244,6 +244,10 @@ export default {
                 .catch((err) => {});
         },
         getordersforpopup(table) {
+            if(table == 0){
+                this.addLoader = false;
+                return false;
+            }
             axios
                 .get("/api/getordersforpopup/" + table)
                 .then((res) => {
@@ -254,6 +258,10 @@ export default {
                 .catch((err) => {});
         },
         orderSave(orderId,tableId) {
+            if(orderId == 1 || orderId == 2){
+                this.$emit('showToast',"This is Demo Order. You Can't Serve it",'error');
+                return false;
+            }
             axios
                 .post("/api/order-save", {
                     orderId: orderId,
@@ -265,6 +273,10 @@ export default {
                 }).catch((error) => {})
         },
         orderPay(orderId,tableId) {
+            if(orderId == 1 || orderId == 2){
+                this.$emit('showToast',"This is Demo Order. You Can't Pay it",'error');
+                return false;
+            }
             axios
                 .post("/api/order-pay", {
                     orderId: orderId,
@@ -287,6 +299,9 @@ export default {
                 })
         },
         printOrder(id) {
+            if(id == 0){
+                return false;
+            }
             axios
                 .get("/api/prinorder/" + id)
                 .then((res) => {

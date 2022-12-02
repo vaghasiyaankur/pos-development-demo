@@ -140,7 +140,7 @@
         </div>
         <div class="row">
           <div class="12">
-            <textarea class="form-control border-radius-10" rows="2" v-model="desc" placeholder="comment" style="padding:0.5rem;"></textarea>
+            <!-- <textarea class="form-control border-radius-10" rows="2" v-model="desc" placeholder="comment" style="padding:0.5rem;"></textarea> -->
           </div>
         </div>
       </div>
@@ -237,7 +237,7 @@ export default {
 }
 
 .main-content .pos-main .pos-inner .allorder .force-overflow {
-  height: calc(100vh - 170px - 186px);
+  height: calc(100vh - 105px - 186px);
 }
  .pos-main .tab-view-cart .pos-left-main{
     height: 100vh;
@@ -382,7 +382,7 @@ export default {
 }
 @media screen and (max-width:1180px){
   .main-content .pos-main .pos-inner .allorder .force-overflow{
-    height: calc(100vh - 168px - 230px);
+    height: calc(100vh - 87px - 230px);
   }
   .pos-main .tab-view-cart .pos-left-main{
     max-height: calc(100vh - 136px);
@@ -406,7 +406,7 @@ export default {
     max-height: calc(100vh - 136px);
   }
   .main-content .pos-main .pos-inner .allorder .force-overflow{
-    height: calc(100vh - 154px - 230px);
+    height: calc(100vh - 93px - 230px);
   }
  }
  @media screen and (max-width:768px){
@@ -422,7 +422,7 @@ export default {
       flex-wrap:wrap !important;
     }
     .main-content .pos-main .pos-inner .allorder .force-overflow{
-      height: calc(100vh - 241px - 173px);
+      height: calc(100vh - 176px - 173px);
     }
  }
 

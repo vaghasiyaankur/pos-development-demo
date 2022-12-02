@@ -19,7 +19,7 @@
                             <div class="text-center mt-sm-5 mb-4 text-white-50">
                                 <div>
                                     <router-link hred="javascript:;" to="/" class="d-inline-block auth-logo">
-                                        <img src="assets/images/logo-light.png" alt="login" height="20">
+                                        <img :src="logo_image" class="img-fluid" alt="screen">
                                     </router-link>
                                 </div>
                             </div>
@@ -111,7 +111,11 @@ import { useToast } from "vue-toastification";
                     error : '',
                 },
                 toast : useToast(),
+                logo_image : ''
             }
+        },
+        created() {
+            this.getusepasscode();
         },
         mounted() {
             document.getElementById("password-addon").addEventListener("click",function(){var e=document.getElementById("password-input");"password"===e.type?e.type="text":e.type="password"});
@@ -165,7 +169,18 @@ import { useToast } from "vue-toastification";
                 })
 
 
-        },
+            },  
+            /* User Passcode catch from database */
+            getusepasscode(){
+                axios.get('/api/getuserpasscode')
+                .then(res => {
+                    this.logo_image = res.data.logo_image;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            },
+
         }
     }
 
@@ -175,5 +190,8 @@ import { useToast } from "vue-toastification";
 <style scoped>
 .error{
     color : red;
+}
+.auth-one-bg{
+    background: none;
 }
 </style>

@@ -93,6 +93,7 @@ class DashboardController extends Controller
                 }
             }
         }
+        
 
         $recently_add = Product::orderBy('id', 'desc')->take(6)->get();
         $recently_update = Product::orderBy('updated_at', 'desc')->take(6)->get();

@@ -67,7 +67,7 @@
                                         <div class="order-details-single border-bottom pb-3 mb-3" v-for="product in orderProduct" :key="product">
                                             <div class="row align-items-center mx-0">
                                                 <div class="col-2 px-2">
-                                                    <img :src="'/storage/'+product.image" alt="order" class="img-fluid border-radius-10">
+                                                    <img :src="'/storage/'+product.image" alt="order image" class="img-fluid border-radius-10">
                                                 </div>
                                                 <div class="col-8 px-2">
                                                     <p class="fs-12 color-gray mb-0">{{product.name}}</p>

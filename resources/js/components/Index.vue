@@ -311,11 +311,6 @@ export default {
         margin-top: 60px;
     }
 } 
-@media screen and (max-width:1180px) {
-    .main-content .page-content .dashboards {
-        height: calc(100vh - 140px);
-    }
-}
 /* --------------- RESPONSIVE CSS END -------------*/
 
 </style>

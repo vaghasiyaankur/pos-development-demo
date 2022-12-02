@@ -18,7 +18,7 @@ class CategoryTableSeeder extends Seeder
             'Pizza',
             'Aglioe',
             'Gamberoni',
-            'Primavera (vegetarisch)',
+            'Primavera',
             'Aperitifs',
             'Shots',
             'Cocktails',

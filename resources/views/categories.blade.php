@@ -150,7 +150,7 @@
                                         class="avatar-sm rounded-circle">
                                 </div>
                                 <div class="flex-grow-1 ms-2">
-                                    <h5 class="card-title fw-bold">Primavera (vegetarisch)</h5>
+                                    <h5 class="card-title fw-bold">Primavera</h5>
                                     <a href="items-list.html" class="text-primary mb-0">30 items</a>
                                 </div>
                             </div>

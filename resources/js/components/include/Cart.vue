@@ -130,7 +130,7 @@
     </div>
     <div class="bottom-bar px-3 py-2">
       <div class="comment-box">
-        <div class="row mb-1">
+        <div class="row">
           <div class="col-7">
             <p class="m-0 fw-bold fs-12 text-start text-nowrap">Total Amount</p>
           </div>
@@ -138,11 +138,11 @@
             <p class="m-0 fw-bold fs-12 text-end text-nowrap">{{currencyCode}} {{(cart.total).toFixed(2)}}</p>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="12">
-            <!-- <textarea class="form-control border-radius-10" rows="2" v-model="desc" placeholder="comment" style="padding:0.5rem;"></textarea> -->
+            <textarea class="form-control border-radius-10" rows="2" v-model="desc" placeholder="comment" style="padding:0.5rem;"></textarea>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="row">
         <div class="col-12">

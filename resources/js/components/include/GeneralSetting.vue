@@ -157,7 +157,7 @@ export default {
                     this.print_bill_header = data.print_bill_header
                     this.print_bill_footer = data.print_bill_footer
                     this.logo_image_url = `/storage/`+data.logo
-                    this.light_logo_image_url = `/storage/`+data.light_logo
+                    this.light_logo_image_url = `/storage/`+data.light_icon
                     this.fav_icon_image_url = `/storage/`+data.fav_icon
                     this.time_zone = data.time_zone
                     this.timeZone = res.data.timeZone;

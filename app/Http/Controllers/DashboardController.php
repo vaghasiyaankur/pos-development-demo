@@ -49,33 +49,34 @@ class DashboardController extends Controller
         $top_selling = Product::orderBy('id', 'desc')->take(6)->get();
         
 
-        $orderData = session()->get('demoOrderData');
-        $orders = [];
-        $ltfive = 0;
+        // $orderData = session()->get('demoOrderData');
+        // $orders = [];
+        // $ltfive = 0;
 
-        if($orderData){
-            foreach($orderData as $k => $orderPro){
-                foreach($orderPro as $key=>$order){
-                    if($key != 'table' && $key != 'customer_name' && $key != 'customer_number' && $key != 'customer_email' && $key != 'ordered'){
-                        $total_orders += 1;
-                        $pending_orders += 1;
-                    }
+        // if($orderData){
+        //     foreach($orderData as $k => $orderPro){
+        //         foreach($orderPro as $key=>$order){
+        //             if($key != 'table' && $key != 'customer_name' && $key != 'customer_number' && $key != 'customer_email' && $key != 'ordered'){
+        //                 $total_orders += 1;
+        //                 $pending_orders += 1;
+        //             }
 
-                    if($key != 'table' && $key != 'customer_name' && $key != 'customer_number' && $key != 'customer_email' && $key != 'ordered' && $ltfive < 5){
-                        $ltfive += 1;
-                        $latest_orders[$k.'-'.$key]['created_at'] = $order['created_at'];
-                        $latest_orders[$k.'-'.$key]['id'] = $k.'-'.$key;
-                        $latest_orders[$k.'-'.$key]['ordered'] = 1;
-                        $latest_orders[$k.'-'.$key]['pay_amount'] = $order['pay_amount'];
-                        $latest_orders[$k.'-'.$key]['payed'] = 1;
-                        $latest_orders[$k.'-'.$key]['purchase_type'] = $order['purchase_type'];
-                        $latest_orders[$k.'-'.$key]['total_amount'] = $order['total_amount'];
-                        $latest_orders[$k.'-'.$key]['updated_at'] = $order['created_at'];
-                        $latest_orders[$k.'-'.$key]['user_id'] = 1;
-                    }
-                }
-            }
-        }
+        //             if($key != 'table' && $key != 'customer_name' && $key != 'customer_number' && $key != 'customer_email' && $key != 'ordered' && $ltfive < 5){
+        //                 $ltfive += 1;
+        //                 $latest_orders[$k.'-'.$key]['created_at'] = $order['created_at'];
+        //                 $latest_orders[$k.'-'.$key]['id'] = $k.'-'.$key;
+        //                 $latest_orders[$k.'-'.$key]['ordered'] = 1;
+        //                 $latest_orders[$k.'-'.$key]['pay_amount'] = $order['pay_amount'];
+        //                 $latest_orders[$k.'-'.$key]['payed'] = 1;
+        //                 $latest_orders[$k.'-'.$key]['purchase_type'] = $order['purchase_type'];
+        //                 $latest_orders[$k.'-'.$key]['total_amount'] = $order['total_amount'];
+        //                 $latest_orders[$k.'-'.$key]['updated_at'] = $order['created_at'];
+        //                 $latest_orders[$k.'-'.$key]['user_id'] = 1;
+        //             }
+        //         }
+        //     }
+        // }
+        $latest_orders = Order::where('payed', 0)->orderBy('id', 'desc')->take(6)->get();
 
         $completeOrderData = session()->get('demoCompleteOrderData');
         $completed_orders = [];

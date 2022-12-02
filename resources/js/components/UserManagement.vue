@@ -584,7 +584,7 @@ export default {
 }
 @media screen and (max-width:1180px) {
     .main-content .page-content .user-management {
-    height: calc(100vh - 190px);
+    height: calc(100vh - 158px);
     }
 }
 @media screen and (max-width:820px) {

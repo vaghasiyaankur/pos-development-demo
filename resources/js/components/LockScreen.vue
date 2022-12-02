@@ -476,9 +476,9 @@ import { useToast } from "vue-toastification";
     }
     /************** RESPONSIVE CSS ****************/
     @media screen and (max-width:1180px){
-        .lock-screen{
+        /*.lock-screen{
             height: 96vh;
-        }
+        }*/
     }
     @media screen and (max-width:820px){
         .lock-screen{

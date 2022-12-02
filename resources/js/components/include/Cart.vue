@@ -381,9 +381,9 @@ export default {
 }
 }
 @media screen and (max-width:1180px){
-  .main-content .pos-main .pos-inner .allorder .force-overflow{
+  /*.main-content .pos-main .pos-inner .allorder .force-overflow{
     height: calc(100vh - 87px - 230px);
-  }
+  }*/
   /*.pos-main .tab-view-cart .pos-left-main{
     max-height: calc(100vh - 136px);
   }*/

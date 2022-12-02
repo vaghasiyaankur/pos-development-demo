@@ -42,7 +42,7 @@
                 " :id="'right-selection-'+ingredient.id" :for="'formCheck_' + ingredient.id" :class="{ active : selIng.includes(ingredient.id) }">
                             <div class="col-2 ps-0">
                                 <div class="product-img text-center">
-                                    <img :src="'/storage/'+ ingredient.image" alt="IMG" :id="'ingredient_image_'+ingredient.id" />
+                                    <img :src="'/storage/'+ ingredient.image" alt="IMG 1" :id="'ingredient_image_'+ingredient.id" />
                                 </div>
                             </div>
                             <div class="col-9" style="border-left: 1px solid #0ab39c">

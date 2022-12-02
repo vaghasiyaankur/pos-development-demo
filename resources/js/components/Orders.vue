@@ -536,9 +536,9 @@ export default {
 }
 
 @media screen and (max-width:1180px) {
-    .main-content .page-content .current-order {
+    /*.main-content .page-content .current-order {
         height: calc(100vh - 190px);
-    }
+    }*/
 
     .main-content .page-content .current-order .c-order-main {
         max-height: calc(100vh - 272px);

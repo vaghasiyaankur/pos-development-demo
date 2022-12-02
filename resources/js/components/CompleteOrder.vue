@@ -400,10 +400,10 @@ export default {
     /*************** RESPONSIVE CSS ********************/
     @media screen and (max-width:1180px) {
         .complete-order .complete-order-inner .complete-order-right{
-            max-height: calc(100vh - 194px);
+            max-height: calc(100vh - 155px);
         }
         .complete-order .complete-order-right .order-right-details-main{
-            max-height: calc(100vh - 447px);
+            max-height: calc(100vh - 407px);
         }
     }
 </style>

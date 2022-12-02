@@ -326,7 +326,7 @@ export default {
 }
 @media screen and (max-width:1180px){
     .product-right-main .tab-content .products-right-sidebar{
-        height: calc(100vh - 329px) !important;
+        height: calc(100vh - 295px) !important;
     }
 
 }

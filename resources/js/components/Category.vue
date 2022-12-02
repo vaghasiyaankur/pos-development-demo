@@ -305,9 +305,9 @@ export default {
         background-color:#0ab39c;
     }
     @media screen and (max-width:1180px){
-         .catagory-mang{
+        /* .catagory-mang{
         max-height: calc(100vh - 213px);
-        }
+        }*/
     }
      @media screen and (max-width:820px){
         .catagory-mang{

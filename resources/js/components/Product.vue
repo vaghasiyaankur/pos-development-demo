@@ -375,9 +375,9 @@ export default {
             flex:0 0 12.5%;
             max-width:12.5%;
         }
-        .catagory-mang{
+        /*.catagory-mang{
         max-height: calc(100vh - 213px);
-        }
+        }*/
     }
     @media screen and (max-width:1024px) {
         .catagory-mang{

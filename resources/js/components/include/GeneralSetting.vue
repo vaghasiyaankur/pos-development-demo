@@ -343,7 +343,7 @@ export default {
     /*--------------- RESPONSIVE CSS -------------------*/
     @media screen and (max-width:1180px){
         .setting-right{
-            max-height: calc(100vh - 190px);
+            max-height: calc(100vh - 160px);
         }
     }
     @media screen and (max-width:820px){

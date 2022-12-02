@@ -40,7 +40,7 @@ export default {
     }
     @media screen and (max-width:1180px) {
         .setting-left{
-            max-height: calc(100vh - 190px);
+            max-height: calc(100vh - 158px);
         }
     }
     @media screen and (max-width:820px) {

@@ -534,10 +534,10 @@ input:checked + .slider:before {
 /*********    RESPONSIVE CSS **********/
 @media screen and (max-width:1180px){
     .table-management{
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 172px);
     }
     .table-management .table-status-main{
-        max-height:565px;
+        max-height:475px;
     }
 }
 @media screen and (max-width:820px){

@@ -291,9 +291,9 @@ export default {
             flex:0 0 12.5%;
             max-width:12.5%;
         }
-        .catagory-mang{
+        /*.catagory-mang{
         max-height: calc(100vh - 213px);
-        }
+        }*/
     }
      @media screen and (min-width:1024px) and (max-width:1179px){
         .categories-main .catagory-inner .catagory-single-card{

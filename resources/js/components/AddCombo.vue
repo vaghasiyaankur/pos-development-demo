@@ -497,10 +497,10 @@ export default {
     }
     @media screen and (max-width:1180px){
         .addcombo-main .addcombo-inner .addcombo-start{
-            height: calc(100vh - 205px);
+            height: calc(100vh - 170px);
         }
         .addcombo-main .addcombo-inner .addcombo-left .addcombo-card-main{
-            max-height: calc(100vh - 259px);
+            max-height: calc(100vh - 225px);
         }
     }
     @media screen and (max-width:1024px){
@@ -544,7 +544,7 @@ export default {
     }
     @media screen and (max-width:1180px){
         .addcombo-main .addcombo-inner .addcombo-right .addcombo-card-main{
-            max-height: calc(100vh - 459px);
+            max-height: calc(100vh - 440px);
         }
 
     }

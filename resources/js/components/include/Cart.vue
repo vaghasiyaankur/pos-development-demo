@@ -384,9 +384,9 @@ export default {
   .main-content .pos-main .pos-inner .allorder .force-overflow{
     height: calc(100vh - 87px - 230px);
   }
-  .pos-main .tab-view-cart .pos-left-main{
+  /*.pos-main .tab-view-cart .pos-left-main{
     max-height: calc(100vh - 136px);
-  }
+  }*/
 
 }
 @media screen and (max-width:991px){

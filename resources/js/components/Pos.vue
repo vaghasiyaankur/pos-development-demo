@@ -906,11 +906,11 @@ export default {
     border-bottom-color: #212529;
 }
 }
-@media screen and (max-width:1180px){
+/*@media screen and (max-width:1180px){
     .main-content .pos-main .pos-right-main .pos-menu-card .menu-card-inner{
     max-height: calc(100vh - 230px) ;
   }
-}
+}*/
 @media screen and (max-width:991px){
    .col-md-lg{
     width:100%;

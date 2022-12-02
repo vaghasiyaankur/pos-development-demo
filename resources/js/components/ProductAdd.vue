@@ -692,7 +692,7 @@ export default {
     }
     @media screen and (max-width:1180px){
         .product-main-content .product-left-main{
-        max-height: calc(100vh - 205px);
+        max-height: calc(100vh - 170px);
         }
     }
    @media screen and (max-width:820px){

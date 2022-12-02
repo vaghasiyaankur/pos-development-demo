@@ -338,9 +338,9 @@ export default {
             flex:0 0 12.5%;
             max-width:12.5%;
         }
-        .catagory-mang{
+        /*.catagory-mang{
         max-height: calc(100vh - 140px);
-        }
+        }*/
          .categories{
         overflow: auto;
         height: 100%;

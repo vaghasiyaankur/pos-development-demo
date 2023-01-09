@@ -199,8 +199,8 @@ class UserManagementController extends Controller
     public function userPasscode()
     {
         $indexper = Permission::where('function', 'Index')->count();
-        $logo_image = Setting::where('type', 'light_logo')->first();
-        $logo_image_path = 'storage/'.$logo_image->value;
+        $logo_image = Setting::where('type', 'light_icon')->first();
+        $logo_image_path = 'storage/'.@$logo_image->value;
 
 
         return response()->json(['passcode' => 0000, 'indexpermission' => $indexper, 'logo_image' => $logo_image_path]);
